@@ -81,15 +81,11 @@ jobs:
     - name: Test CHARMM conversion
       if: ${{ matrix.charmm-conversion == 'true' }}
       run: |
-
-        # TODO: Turn on these tests (in job matrix) when new ParmEd is released
-        # TODO: Find a way to avoid timing out when running full charmm36.yaml conversion below
-        python convert_charmm.py --verbose --in files/waters.yaml && python convert_charmm.py --verbose --in files/charmm36.yaml
-        python convert_charmm.py --verbose --in files/waters.yaml
-        python convert_charmm.py --verbose
-
-        # TODO: Uncomment this when tests are expected to work
-        # python test_charmm.py --verbose
+        # NOTE: not currently used due to significant internal changes required
+        # to ParmEd needed to generate; we test against the pregenerated FFXML
+        # files instead.
+        # ./convert_charmm.sh
+        ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/epretti/test_charmm
 
       working-directory: ./charmm
 
