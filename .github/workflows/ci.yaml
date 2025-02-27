@@ -73,13 +73,13 @@ jobs:
     #     KMP_DUPLICATE_LIB_OK: "True"
 
     - name: Test AMBER conversion
-      if: ${{ matrix.amber-conversion == 'true' }}
+      if: ${{ matrix.amber-conversion }}
       run: |
         python convert_amber.py --input gaff.yaml --log gaff-tests.csv --verbose
       working-directory: ./amber
 
     - name: Test CHARMM conversion
-      if: ${{ matrix.charmm-conversion == 'true' }}
+      if: ${{ matrix.charmm-conversion }}
       run: |
         # NOTE: not currently used due to significant internal changes required
         # to ParmEd needed to generate; we test against the pregenerated FFXML
