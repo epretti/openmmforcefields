@@ -848,7 +848,8 @@ class TestRunner:
                     self.charmm_docker_image,
                     "charmm",
                 ]
-            result = subprocess.run(charmm_command, input="\n".join(charmm_input_lines).encode(), capture_output=True)
+            result = subprocess.run(charmm_command, input="\n".join(charmm_input_lines).encode())
+            raise SystemExit
 
         if dump_out_path is not None:
             with open(dump_out_path, "wb") as dump_out_file:
