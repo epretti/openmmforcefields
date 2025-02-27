@@ -466,8 +466,10 @@ class TestRunner:
         dump_path = test_path.replace("/", "_")
 
         # Run tests and get results.
+        print(f"Test {test_spec['name']!r} in {test_path!r}:")
         results_sets = {}
         if self.do_charmm:
+            print("    (Running CHARMM)")
             results_sets["charmm"] = self.get_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -476,6 +478,7 @@ class TestRunner:
                 f"{dump_path}_charmm.log" if self.do_dump else None,
             )
         if self.do_openmm_charmm:
+            print("    (Running OpenMM reading CHARMM PSF file)")
             results_sets["openmm_charmm"] = self.get_openmm_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -483,6 +486,7 @@ class TestRunner:
                 f"{dump_path}_openmm_charmm.xml" if self.do_dump else None,
             )
         if self.do_parmed_charmm:
+            print("    (Running OpenMM using ParmEd to read CHARMM PSF file)")
             results_sets["parmed_charmm"] = self.get_parmed_charmm_energies_forces(
                 test_directory,
                 test_spec,
@@ -490,12 +494,14 @@ class TestRunner:
                 f"{dump_path}_parmed_charmm.xml" if self.do_dump else None,
             )
         if self.do_openmm_ffxml:
+            print("    (Running OpenMM creating system from FFXML)")
             results_sets["openmm_ffxml"] = self.get_openmm_ffxml_energies_forces(
                 test_directory,
                 test_spec,
                 coordinates_list,
                 f"{dump_path}_openmm_ffxml.xml" if self.do_dump else None,
             )
+        print()
 
         # Zero anything that's not being tested.
         for results in results_sets.values():
@@ -512,7 +518,6 @@ class TestRunner:
         # Special handling occurs for Drude systems.
         is_drude = test_spec.get("drude", False)
 
-        print(f"Test {test_spec['name']!r} in {test_path!r}:")
         failure_count = 0
         for (name_1, results_1), (name_2, results_2) in itertools.combinations(results_sets.items(), 2):
             print(f"    Comparing {name_1} vs. {name_2}")
@@ -848,8 +853,7 @@ class TestRunner:
                     self.charmm_docker_image,
                     "charmm",
                 ]
-            result = subprocess.run(charmm_command, input="\n".join(charmm_input_lines).encode())
-            raise SystemExit
+            result = subprocess.run(charmm_command, input="\n".join(charmm_input_lines).encode(), capture_output=True)
 
         if dump_out_path is not None:
             with open(dump_out_path, "wb") as dump_out_file:
