@@ -95,6 +95,7 @@ jobs:
         # ./convert_charmm.sh
  
         docker pull ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1
+        (echo '* test'; echo '*'; echo 'stop') | docker run --rm -i ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1 charmm
         ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1
 
       working-directory: ./charmm
