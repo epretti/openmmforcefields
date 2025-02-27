@@ -94,6 +94,7 @@ jobs:
         # files instead.
         # ./convert_charmm.sh
  
+        docker pull ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1
         ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/epretti/openmmforcefields-ci-charmm:c49b1
 
       working-directory: ./charmm
