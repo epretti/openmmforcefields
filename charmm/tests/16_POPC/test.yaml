@@ -1,7 +1,7 @@
 name: POPC lipid bilayer
 
-psf_file: POPC.psf
-pdb_file: POPC.pdb
+psf_file: popc.psf
+pdb_file: popc.pdb
 
 charmm_files:
   - top_all36_lipid.rtf
