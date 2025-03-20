@@ -1063,6 +1063,8 @@ class TestSMIRNOFFTemplateGenerator(TemplateGeneratorBaseCase):
                 continue
             if "opc" in small_molecule_forcefield:
                 continue
+            if "spce" in small_molecule_forcefield:
+                continue
 
             # We cannot test openff-2.0.0-rc.1 because it triggers an openmm.OpenMMException
             # due to an equilibrium angle > \pi
