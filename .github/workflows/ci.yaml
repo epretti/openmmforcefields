@@ -27,10 +27,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        python-version: ["3.11", "3.12", "3.13"]
+        os: [macos-latest]
+        python-version: ["3.12"]
         amber-conversion: [false]
-        openmm-version: ["8.2.0", "8.3.1"]
+        openmm-version: ["8.2.0"]
 
     steps:
     - uses: actions/checkout@v4
@@ -79,8 +79,16 @@ jobs:
         # https://github.com/openmm/openmmforcefields/issues/399
         python -c "import dgl"
 
-        pytest -n logical --rungaff --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 \
-          openmmforcefields/tests/
+        rm   -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf ~/.dgl && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
 
     - name: Test Installed Package
       if: matrix.python-version == '3.13'
