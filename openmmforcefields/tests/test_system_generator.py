@@ -46,11 +46,11 @@ def test_systems():
         n_molecules = len(molecules)
 
         # Limit number of molecules for testing
-        MAX_MOLECULES = 10 if not CI else 2
-        if n_molecules > MAX_MOLECULES:
-            print(f"Limiting to {MAX_MOLECULES} for testing...")
-            n_molecules = MAX_MOLECULES
-        molecules = [molecules[index] for index in range(n_molecules)]
+        # MAX_MOLECULES = 10 if not CI else 2
+        # if n_molecules > MAX_MOLECULES:
+        #     print(f"Limiting to {MAX_MOLECULES} for testing...")
+        #     n_molecules = MAX_MOLECULES
+        # molecules = [molecules[index] for index in range(n_molecules)]
 
         # Create structures
         import parmed
@@ -374,6 +374,7 @@ class TestSystemGenerator:
 
             # Parameterize molecules
             for molecule in molecules:
+                print(molecule)
                 openmm_topology = molecule.to_topology().to_openmm()
                 # Specify molecules during system creation
                 generator.create_system(openmm_topology, molecules=molecules)
