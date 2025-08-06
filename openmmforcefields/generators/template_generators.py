@@ -1863,11 +1863,13 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
             # Check cache
             cached_filename = os.path.join(self.ESPALOMA_MODEL_CACHE_PATH, filename)
             if os.path.exists(cached_filename):
-                _logger.info(f"Using espaloma model cached at {cached_filename}")
+                print(f"Using espaloma model cached at {cached_filename}")
                 return cached_filename
             else:
                 # Create the cache directory
+                print(f"Making directory {self.ESPALOMA_MODEL_CACHE_PATH}")
                 os.makedirs(self.ESPALOMA_MODEL_CACHE_PATH, exist_ok=True)
+                print(f"Made directory {self.ESPALOMA_MODEL_CACHE_PATH}")
 
                 # Attempt to retrieve from URL
                 _logger.info(f"Attempting to retrieve espaloma model from {url}")
@@ -1879,12 +1881,15 @@ class EspalomaTemplateGenerator(SmallMoleculeTemplateGenerator, OpenMMSystemMixi
                 with tempfile.TemporaryDirectory(dir=self.ESPALOMA_MODEL_CACHE_PATH) as temp_dir:
                     temp_filename = os.path.join(temp_dir, filename)
                     try:
+                        print(f"Downloading file {temp_filename}")
                         urllib.request.urlretrieve(url, filename=temp_filename)
                     except urllib.error.URLError:
                         raise ValueError(f"No espaloma model found at expected URL: {url}")
                     except urllib.error.HTTPError as e:
                         raise ValueError(f"An error occurred while retrieving espaloma model from {url} : {e}")
+                    print(f"Moving file from {temp_filename} to {cached_filename}")
                     os.replace(temp_filename, cached_filename)
+                    print(f"Moved file from {temp_filename} to {cached_filename}")
                 return cached_filename
 
     @property
