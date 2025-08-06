@@ -77,16 +77,16 @@ jobs:
         # https://github.com/openforcefield/openff-units/issues/111
         python -c "from openff.units import unit"
 
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
-        rm -rf /Users/runner/.espaloma && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
+        rm -rf /Users/runner/.espaloma   && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/ && \
+          rm -rf /Users/runner/.espaloma && rm -rf /Users/runner/.dgl && python -c "import dgl" && pytest -n logical -k "espaloma" --runespaloma --log-cli-level $LOGLEVEL $COV_ARGS --durations=20 openmmforcefields/tests/
 
     - name: Test Installed Package
       if: matrix.python-version == '3.13'
