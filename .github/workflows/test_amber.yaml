@@ -1,4 +1,4 @@
-name: CHARMM conversion validation
+name: Amber conversion validation
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
     - name: Setup Conda Environment
       uses: mamba-org/setup-micromamba@v2
       with:
-        environment-file: devtools/conda-envs/test_charmm_env.yaml
+        environment-file: devtools/conda-envs/test_env.yaml
         create-args: >-
           python=${{ matrix.python-version }}
           openmm=${{ matrix.openmm-version }}
@@ -48,7 +48,7 @@ jobs:
     # NOTE: Currently, testing the conversion itself is not done as the
     # conversion requires multiple modifications to the internals of a
     # particular version of ParmEd.  But the output FFXML files do get tested:
-    - name: Test CHARMM conversion
+    - name: Test Amber conversion
       run: |
-        ./test_charmm.sh --ffxml-directory ../openmmforcefields/ffxml/charmm --charmm-docker-image ghcr.io/openmm/openmmforcefields-ci-charmm:c49b1
-      working-directory: ./charmm
+        ./test_amber.py cases/* --sander --openmm-amber --openmm-ffxml
+      working-directory: ./amber/test/

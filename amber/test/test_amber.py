@@ -131,8 +131,7 @@ def main():
 
 def run(args):
     """
-    Runs the specified tests with the specified options and exits.  The return
-    code will be the number of failed tests.
+    Runs the specified tests with the specified options and exits.
 
     Parameters
     ----------
@@ -191,7 +190,7 @@ def run(args):
         formatted_line = f"{'Succeeded' if success_flag else 'Failed':9}  {test_message}"
         print(f"    {test_name:{test_name_width}}  {formatted_line if success_flag else color_message(formatted_line)}")
 
-    sys.exit(failure_count)
+    sys.exit(int(bool(failure_count)))
 
 class TestRunner:
     """
