@@ -1,0 +1,9 @@
+source leaprc.protein.ff19SB
+chain_1 = sequence { NALA HYP HYP HYP CALA }
+chain_2 = sequence { NALA HYP HYP HYP CALA }
+test_case = sequence { chain_1 chain_2 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

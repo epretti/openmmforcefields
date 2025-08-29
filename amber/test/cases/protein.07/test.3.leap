@@ -1,0 +1,10 @@
+source oldff/leaprc.ff10
+chain_1 = sequence { NTRP TRP TRP TRP CTRP }
+chain_2 = sequence { NTYR TYR TYR TYR CTYR }
+chain_3 = sequence { NVAL VAL VAL VAL CVAL }
+test_case = sequence { chain_1 chain_2 chain_3 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
