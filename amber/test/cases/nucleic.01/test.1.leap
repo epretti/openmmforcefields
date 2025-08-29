@@ -1,0 +1,16 @@
+source oldff/leaprc.DNA.bsc0
+chain_1 = sequence { DA5 DA DA DC DG DT DA DA3 }
+chain_2 = sequence { DA5 DA DA3 }
+chain_3 = sequence { DC5 DC DC3 }
+chain_4 = sequence { DG5 DG DG3 }
+chain_5 = sequence { DT5 DT DT3 }
+chain_6 = sequence { DAN }
+chain_7 = sequence { DCN }
+chain_8 = sequence { DGN }
+chain_9 = sequence { DTN }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 chain_9 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

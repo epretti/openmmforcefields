@@ -1,0 +1,12 @@
+source oldff/leaprc.ff99
+chain_1 = sequence { NCYX ALA CCYX }
+chain_2 = sequence { NALA ALA CYX ALA CALA }
+chain_3 = sequence { NALA ALA CYX ALA CALA }
+test_case = sequence { chain_1 chain_2 chain_3 }
+bond test_case.1.SG test_case.6.SG
+bond test_case.3.SG test_case.11.SG
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
