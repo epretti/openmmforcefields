@@ -1,0 +1,122 @@
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+MODEL        1
+HETATM    1 Sn    Sn A   1      -4.512  -0.733   2.713  1.00  0.00          Sn  
+TER       2       Sn A   1
+HETATM    3 SR    SR B   1      -4.260   0.878  -3.074  1.00  0.00          Sr  
+TER       4       SR B   1
+HETATM    5 TB    TB C   1      -2.217   4.400   1.280  1.00  0.00          Tb  
+TER       6       TB C   1
+HETATM    7 Th    Th D   1      -2.374  -4.365  -1.646  1.00  0.00          Th  
+TER       8       Th D   1
+HETATM    9 Tm    Tm E   1      -0.038  -4.325   3.143  1.00  0.00          Tm  
+TER      10       Tm E   1
+HETATM   11  U   U4+ F   1       0.418   4.091  -3.463  1.00  0.00           U  
+TER      12      U4+ F   1
+HETATM   13  V2+ V2+ G   1       3.057  -4.318  -0.978  1.00  0.00           V  
+TER      14      V2+ G   1
+HETATM   15  Y     Y H   1       0.559   1.219   4.735  1.00  0.00           Y  
+TER      16        Y H   1
+HETATM   17 YB2  YB2 I   1       3.610   3.634   0.989  1.00  0.00          Yb  
+TER      18      YB2 I   1
+HETATM   19 ZN    ZN J   1       0.470  -0.038   0.025  1.00  0.00          Zn  
+TER      20       ZN J   1
+HETATM   21 Zr    Zr K   1       4.452   0.378  -3.502  1.00  0.00          Zr  
+TER      22       Zr K   1
+ENDMDL
+MODEL        2
+HETATM    1 Sn    Sn A   1      -4.994  -0.852   2.943  1.00  0.00          Sn  
+TER       2       Sn A   1
+HETATM    3 SR    SR B   1      -4.311   0.958  -3.345  1.00  0.00          Sr  
+TER       4       SR B   1
+HETATM    5 TB    TB C   1      -2.439   4.511   1.263  1.00  0.00          Tb  
+TER       6       TB C   1
+HETATM    7 Th    Th D   1      -2.264  -4.386  -1.759  1.00  0.00          Th  
+TER       8       Th D   1
+HETATM    9 Tm    Tm E   1      -0.340  -4.484   2.989  1.00  0.00          Tm  
+TER      10       Tm E   1
+HETATM   11  U   U4+ F   1       0.344   4.133  -3.427  1.00  0.00           U  
+TER      12      U4+ F   1
+HETATM   13  V2+ V2+ G   1       2.728  -4.097  -0.891  1.00  0.00           V  
+TER      14      V2+ G   1
+HETATM   15  Y     Y H   1       0.585   1.323   4.670  1.00  0.00           Y  
+TER      16        Y H   1
+HETATM   17 YB2  YB2 I   1       3.661   3.387   0.962  1.00  0.00          Yb  
+TER      18      YB2 I   1
+HETATM   19 ZN    ZN J   1       0.483   0.023   0.255  1.00  0.00          Zn  
+TER      20       ZN J   1
+HETATM   21 Zr    Zr K   1       4.654   0.323  -3.314  1.00  0.00          Zr  
+TER      22       Zr K   1
+ENDMDL
+MODEL        3
+HETATM    1 Sn    Sn A   1      -5.212  -1.020   3.079  1.00  0.00          Sn  
+TER       2       Sn A   1
+HETATM    3 SR    SR B   1      -4.254   1.100  -3.575  1.00  0.00          Sr  
+TER       4       SR B   1
+HETATM    5 TB    TB C   1      -2.662   4.592   1.201  1.00  0.00          Tb  
+TER       6       TB C   1
+HETATM    7 Th    Th D   1      -2.250  -4.433  -1.898  1.00  0.00          Th  
+TER       8       Th D   1
+HETATM    9 Tm    Tm E   1      -0.609  -4.573   2.878  1.00  0.00          Tm  
+TER      10       Tm E   1
+HETATM   11  U   U4+ F   1       0.245   4.184  -3.311  1.00  0.00           U  
+TER      12      U4+ F   1
+HETATM   13  V2+ V2+ G   1       2.642  -3.887  -0.967  1.00  0.00           V  
+TER      14      V2+ G   1
+HETATM   15  Y     Y H   1       0.624   1.426   4.863  1.00  0.00           Y  
+TER      16        Y H   1
+HETATM   17 YB2  YB2 I   1       3.768   3.207   0.982  1.00  0.00          Yb  
+TER      18      YB2 I   1
+HETATM   19 ZN    ZN J   1       0.364   0.018   0.046  1.00  0.00          Zn  
+TER      20       ZN J   1
+HETATM   21 Zr    Zr K   1       4.761   0.255  -3.202  1.00  0.00          Zr  
+TER      22       Zr K   1
+ENDMDL
+MODEL        4
+HETATM    1 Sn    Sn A   1      -5.382  -1.153   3.114  1.00  0.00          Sn  
+TER       2       Sn A   1
+HETATM    3 SR    SR B   1      -4.200   1.072  -3.776  1.00  0.00          Sr  
+TER       4       SR B   1
+HETATM    5 TB    TB C   1      -2.866   4.726   1.246  1.00  0.00          Tb  
+TER       6       TB C   1
+HETATM    7 Th    Th D   1      -2.338  -4.545  -1.978  1.00  0.00          Th  
+TER       8       Th D   1
+HETATM    9 Tm    Tm E   1      -0.872  -4.551   2.868  1.00  0.00          Tm  
+TER      10       Tm E   1
+HETATM   11  U   U4+ F   1       0.234   4.202  -3.249  1.00  0.00           U  
+TER      12      U4+ F   1
+HETATM   13  V2+ V2+ G   1       2.767  -3.960  -1.280  1.00  0.00           V  
+TER      14      V2+ G   1
+HETATM   15  Y     Y H   1       0.701   1.475   5.030  1.00  0.00           Y  
+TER      16        Y H   1
+HETATM   17 YB2  YB2 I   1       3.770   3.055   1.018  1.00  0.00          Yb  
+TER      18      YB2 I   1
+HETATM   19 ZN    ZN J   1      -0.061  -0.016  -0.193  1.00  0.00          Zn  
+TER      20       ZN J   1
+HETATM   21 Zr    Zr K   1       4.795   0.254  -3.195  1.00  0.00          Zr  
+TER      22       Zr K   1
+ENDMDL
+MODEL        5
+HETATM    1 Sn    Sn A   1      -5.671  -1.336   3.110  1.00  0.00          Sn  
+TER       2       Sn A   1
+HETATM    3 SR    SR B   1      -4.192   0.928  -4.055  1.00  0.00          Sr  
+TER       4       SR B   1
+HETATM    5 TB    TB C   1      -3.064   4.668   1.376  1.00  0.00          Tb  
+TER       6       TB C   1
+HETATM    7 Th    Th D   1      -2.441  -4.699  -1.957  1.00  0.00          Th  
+TER       8       Th D   1
+HETATM    9 Tm    Tm E   1      -1.101  -4.493   2.753  1.00  0.00          Tm  
+TER      10       Tm E   1
+HETATM   11  U   U4+ F   1       0.153   4.215  -3.158  1.00  0.00           U  
+TER      12      U4+ F   1
+HETATM   13  V2+ V2+ G   1       3.224  -4.402  -1.451  1.00  0.00           V  
+TER      14      V2+ G   1
+HETATM   15  Y     Y H   1       0.743   1.595   5.024  1.00  0.00           Y  
+TER      16        Y H   1
+HETATM   17 YB2  YB2 I   1       3.747   2.946   0.981  1.00  0.00          Yb  
+TER      18      YB2 I   1
+HETATM   19 ZN    ZN J   1      -0.467  -0.142  -0.181  1.00  0.00          Zn  
+TER      20       ZN J   1
+HETATM   21 Zr    Zr K   1       4.825   0.127  -3.175  1.00  0.00          Zr  
+TER      22       Zr K   1
+ENDMDL
+END

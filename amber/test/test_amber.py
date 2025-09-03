@@ -157,18 +157,21 @@ def run(args):
 
         pdb_file = openmm.app.PDBFile(os.path.join(test_path, "test.pdb"))
         with open(os.path.join(test_path, "test.json"), "rb") as test_file:
-            _, ffxml_lists = zip(*json.load(test_file))
+            test_data = json.load(test_file)
+            _, ffxml_lists = zip(*test_data["force_field_list"])
+            template_list = test_data["template_list"]
+            skip_list = test_data["skip_list"]
 
         for force_field_index, ffxml_list in enumerate(ffxml_lists):
             ffxml_label = ":".join(ffxml.removesuffix(".xml") for ffxml in ffxml_list)
             test_label = f"{test_path}:{ffxml_label}"
             leap_path = os.path.join(test_path, f"test.{force_field_index}.leap")
             if args.debug_exceptions:
-                term_failure_count = runner.run_test(test_label, leap_path, pdb_file, ffxml_list)
+                term_failure_count = runner.run_test(test_label, leap_path, pdb_file, ffxml_list, template_list, skip_list)
                 test_results.append((test_label, term_failure_count == 0, f"{term_failure_count} terms exceeded tolerance"))
             else:
                 try:
-                    term_failure_count = runner.run_test(test_label, leap_path, pdb_file, ffxml_list)
+                    term_failure_count = runner.run_test(test_label, leap_path, pdb_file, ffxml_list, template_list, skip_list)
                 except Exception as error:
                     test_results.append((test_label, False, f"{type(error).__name__}: {error}"))
                 else:
@@ -237,7 +240,7 @@ class TestRunner:
         self.openmm_platform = openmm_platform
         self.ffxml_directory = ffxml_directory
 
-    def run_test(self, test_label, leap_path, pdb_file, ffxml_list):
+    def run_test(self, test_label, leap_path, pdb_file, ffxml_list, template_list, skip_list):
         """
         Runs the specified test with the stored options.
 
@@ -251,6 +254,10 @@ class TestRunner:
             PDB file containing coordinates and topology.
         ffxml_list : list[str]
             List of OpenMM force fields for the test.
+        template_list : list[str] or None
+            List of residue template names for overriding template matching.
+        skip_list : list[str] or None
+            List of energy term names to skip.
 
         Returns
         -------
@@ -266,7 +273,6 @@ class TestRunner:
                 with open(os.path.join(temp_dir, "test.leap"), "wb") as leap_out:
                     leap_out.write(leap_in.read())
             generate_cases.run_leap(temp_dir)
-            prmtop_path = os.path.join(temp_dir, "test.top")
 
             # Get test positions.
             coordinates_list = [pdb_file.getPositions(asNumpy=True, frame=frame_index) for frame_index in range(pdb_file.getNumFrames())]
@@ -282,7 +288,7 @@ class TestRunner:
                 results_sets["openmm_amber"] = self.get_openmm_amber_energies(temp_dir, coordinates_list, f"{dump_prefix}_openmm_amber" if self.do_dump else None)
             if self.do_openmm_ffxml:
                 print("    (Running OpenMM creating system from FFXML)")
-                results_sets["openmm_ffxml"] = self.get_openmm_ffxml_energies(ffxml_list, pdb_file.topology, coordinates_list, f"{dump_prefix}_openmm_ffxml" if self.do_dump else None)
+                results_sets["openmm_ffxml"] = self.get_openmm_ffxml_energies(temp_dir, ffxml_list, pdb_file.topology, coordinates_list, f"{dump_prefix}_openmm_ffxml" if self.do_dump else None, template_list)
             print()
 
         if len(results_sets) < 2:
@@ -295,6 +301,9 @@ class TestRunner:
             # Print results for energies.
             print(f"        {'Energy error':20}  {'|ΔE| (kcal/mol)':20}  {'Relative':12}")
             for force_group in (None, *ForceGroup):
+                force_group_name = "TOTAL" if force_group is None else force_group.name
+                if skip_list is not None and force_group_name in skip_list:
+                    continue
                 difference_data = []
                 for result_1, result_2 in zip(results_1, results_2):
                     energy_1 = result_1[force_group]
@@ -416,12 +425,14 @@ class TestRunner:
         prmtop = openmm.app.AmberPrmtopFile(prmtop_path)
         return self._evaluate_openmm(prmtop.createSystem(**SYSTEM_OPTIONS), coordinates_list, dump_prefix, prmtop.topology)
 
-    def get_openmm_ffxml_energies(self, ffxml_list, topology, coordinates_list, dump_prefix):
+    def get_openmm_ffxml_energies(self, temp_dir, ffxml_list, topology, coordinates_list, dump_prefix, template_list):
         """
         Computes energies with OpenMM using OpenMM AmberPrmtopFile.
 
         Parameters
         ----------
+        temp_dir : str
+            Path to a temporary directory containing test files.
         ffxml_list : list[str]
             List of FFXML files for the OpenMM force field.
         topology : openmm.app.Topology
@@ -432,6 +443,8 @@ class TestRunner:
         dump_prefix : str or None
             Prefix for names of input files to dump for debugging, or None to
             skip dumping.
+        template_list : list[str] or None
+            List of residue template names for overriding template matching.
 
         Returns
         -------
@@ -440,8 +453,99 @@ class TestRunner:
             each ForceGroup (or None for the total potential energy).
         """
 
-        system = openmm.app.ForceField(*(os.path.join(self.ffxml_directory, ffxml) for ffxml in ffxml_list)).createSystem(topology, **SYSTEM_OPTIONS)
-        return self._evaluate_openmm(system, coordinates_list, dump_prefix, topology)
+        system_options = SYSTEM_OPTIONS.copy()
+        if template_list is not None:
+            system_options["residueTemplates"] = {residue: name for residue, name in zip(topology.residues(), template_list, strict=True)}
+        ffxml_system = openmm.app.ForceField(*(os.path.join(self.ffxml_directory, ffxml) for ffxml in ffxml_list)).createSystem(topology, **system_options)
+        prmtop = openmm.app.AmberPrmtopFile(os.path.join(temp_dir, "test.top"))
+        self._match_leap_impropers(ffxml_system, prmtop.createSystem(**SYSTEM_OPTIONS), prmtop.topology)
+        return self._evaluate_openmm(ffxml_system, coordinates_list, dump_prefix, topology)
+
+    def _match_leap_impropers(self, ffxml_system, prmtop_system, topology):
+        """
+        Checks that the impropers in the OpenMM system are set in the correct
+        order based on our interpretation of what LEaP is supposed to do, then
+        modify the impropers to match what LEaP actually does.
+
+        Parameters
+        ----------
+        ffxml_system : openmm.System
+            A system created by parameterizing a topology using an OpenMM XML
+            force field.  The impropers in this system will be modified!
+        prmtop_system : openmm.System
+            A system created by loading an Amber prmtop file.
+        topology : openmm.app.Topology
+            A topology corresponding to the two systems.  This is used to
+            determine which atoms are bonded to which other atoms.
+        """
+
+        ffxml_torsions = [force for force in ffxml_system.getForces() if isinstance(force, openmm.PeriodicTorsionForce)]
+        prmtop_torsions = [force for force in prmtop_system.getForces() if isinstance(force, openmm.PeriodicTorsionForce)]
+
+        def has_no_torsions(torsion_forces):
+            for torsion_force in torsion_forces:
+                for term_index in range(torsion_force.getNumTorsions()):
+                    _, _, _, _, _, _, force_constant = torsion_force.getTorsionParameters(term_index)
+                    if force_constant:
+                        return False
+            return True
+        if has_no_torsions(ffxml_torsions) and has_no_torsions(prmtop_torsions):
+            # If there are no torsions present, there is nothing to modify.
+            return
+
+        ffxml_torsion, = ffxml_torsions
+        prmtop_torsion, = prmtop_torsions
+
+        # Helper table to find which atoms are bonded to which other atoms.
+        bonded_to = [set() for index in range(topology.getNumAtoms())]
+        for atom_1, atom_2 in topology.bonds():
+            bonded_to[atom_1.index].add(atom_2.index)
+            bonded_to[atom_2.index].add(atom_1.index)
+
+        # Check if atoms are bonded.
+        def is_bonded(index_1, index_2):
+            return index_1 in bonded_to[index_2]
+
+        # Check if atoms look like they could be in a proper torsion.
+        def is_proper(index_1, index_2, index_3, index_4):
+            return is_bonded(index_1, index_2) and is_bonded(index_2, index_3) and is_bonded(index_3, index_4)
+
+        def get_impropers(torsion_force):
+            impropers = {}
+            for term_index in range(torsion_force.getNumTorsions()):
+                index_1, index_2, index_3, index_4, _, _, force_constant = torsion_force.getTorsionParameters(term_index)
+                # Skip null torsions and proper torsions.
+                if not force_constant or is_proper(index_1, index_2, index_3, index_4):
+                    continue
+                indices = (index_1, index_2, index_3, index_4)
+                # Try to find the center of what should be an improper.
+                centers = [all(is_bonded(indices[center_index_index], index) for index_index, index in enumerate(indices) if index_index != center_index_index) for center_index_index in range(4)]
+                if centers.count(True) != 1:
+                    raise ValueError(f"can't find central atom for improper {indices}")
+                # Find and sort the peripheral atoms.
+                center_index_index = centers.index(True)
+                peripheral_indices = tuple(sorted(index for index_index, index in enumerate(indices) if index_index != center_index_index))
+                # Build a unique key for the improper with the central atom
+                # index first and peripheral atom indices sorted.  Store the
+                # actual improper order in the system along with the key.
+                improper_key = (indices[center_index_index], *peripheral_indices)
+                if improper_key in impropers:
+                    raise ValueError(f"found duplicate improper {indices}")
+                impropers[improper_key] = (term_index, indices)
+            return impropers
+
+        ffxml_impropers = get_impropers(ffxml_torsion)
+        prmtop_impropers = get_impropers(prmtop_torsion)
+        ffxml_improper_keys = set(ffxml_impropers)
+        prmtop_improper_keys = set(prmtop_impropers)
+        if ffxml_improper_keys - prmtop_improper_keys or prmtop_improper_keys - ffxml_improper_keys:
+            raise ValueError("impropers do not match (worse than peripheral atoms out of order)")
+
+        different_impropers = {}
+        for improper_key, (ffxml_term_index, ffxml_improper) in ffxml_impropers.items():
+            prmtop_term_index, prmtop_improper = prmtop_impropers[improper_key]
+            if min(ffxml_improper, ffxml_improper[::-1]) != min(prmtop_improper, prmtop_improper[::-1]):
+                different_impropers[improper_key] = (ffxml_term_index, prmtop_term_index, ffxml_improper, prmtop_improper)
 
     def _evaluate_openmm(self, system, coordinates_list, dump_prefix, topology):
         """

@@ -1,0 +1,122 @@
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+MODEL        1
+HETATM    1 AL    AL A   1      -2.653   2.338   3.756  1.00  0.00          Al  
+TER       2       AL A   1
+HETATM    3 BA    BA B   1      -2.821  -4.882  -1.782  1.00  0.00          Ba  
+TER       4       BA B   1
+HETATM    5 Be    Be C   1      -3.893   0.057  -1.377  1.00  0.00          Be  
+TER       6       Be C   1
+HETATM    7 BR    BR D   1      -2.688  -2.773   2.766  1.00  0.00          Br  
+TER       8       BR D   1
+HETATM    9 CA    CA E   1      -1.608   5.700  -0.880  1.00  0.00          Ca  
+TER      10       CA E   1
+HETATM   11 CD    CD F   1       0.568  -1.252  -3.929  1.00  0.00          Cd  
+TER      12       CD F   1
+HETATM   13 CL    CL G   1       2.934  -0.831   5.252  1.00  0.00          Cl  
+TER      14       CL G   1
+HETATM   15 CO    CO H   1       2.217  -3.922   0.640  1.00  0.00          Co  
+TER      16       CO H   1
+HETATM   17 CS    CS I   1       2.347   4.145  -3.654  1.00  0.00          Cs  
+TER      18       CS I   1
+HETATM   19 Dy    Dy J   1       0.992   1.150   0.679  1.00  0.00          Dy  
+TER      20       Dy J   1
+HETATM   21 Er    Er K   1       5.375  -0.420  -1.810  1.00  0.00          Er  
+TER      22       Er K   1
+ENDMDL
+MODEL        2
+HETATM    1 AL    AL A   1      -2.374   2.100   3.752  1.00  0.00          Al  
+TER       2       AL A   1
+HETATM    3 BA    BA B   1      -2.818  -4.816  -1.570  1.00  0.00          Ba  
+TER       4       BA B   1
+HETATM    5 Be    Be C   1      -3.346   0.242  -1.100  1.00  0.00          Be  
+TER       6       Be C   1
+HETATM    7 BR    BR D   1      -2.722  -3.031   2.812  1.00  0.00          Br  
+TER       8       BR D   1
+HETATM    9 CA    CA E   1      -1.355   5.619  -0.783  1.00  0.00          Ca  
+TER      10       CA E   1
+HETATM   11 CD    CD F   1       0.563  -1.267  -3.800  1.00  0.00          Cd  
+TER      12       CD F   1
+HETATM   13 CL    CL G   1       3.624  -0.696   5.309  1.00  0.00          Cl  
+TER      14       CL G   1
+HETATM   15 CO    CO H   1       2.473  -3.887   0.954  1.00  0.00          Co  
+TER      16       CO H   1
+HETATM   17 CS    CS I   1       2.258   4.245  -3.545  1.00  0.00          Cs  
+TER      18       CS I   1
+HETATM   19 Dy    Dy J   1       1.050   1.134   0.489  1.00  0.00          Dy  
+TER      20       Dy J   1
+HETATM   21 Er    Er K   1       5.412  -0.377  -2.053  1.00  0.00          Er  
+TER      22       Er K   1
+ENDMDL
+MODEL        3
+HETATM    1 AL    AL A   1      -2.375   2.056   4.241  1.00  0.00          Al  
+TER       2       AL A   1
+HETATM    3 BA    BA B   1      -2.573  -4.905  -1.435  1.00  0.00          Ba  
+TER       4       BA B   1
+HETATM    5 Be    Be C   1      -3.450   0.725  -1.626  1.00  0.00          Be  
+TER       6       Be C   1
+HETATM    7 BR    BR D   1      -2.953  -3.231   3.053  1.00  0.00          Br  
+TER       8       BR D   1
+HETATM    9 CA    CA E   1      -1.580   5.675  -0.759  1.00  0.00          Ca  
+TER      10       CA E   1
+HETATM   11 CD    CD F   1       0.772  -1.368  -3.695  1.00  0.00          Cd  
+TER      12       CD F   1
+HETATM   13 CL    CL G   1       3.777  -0.840   5.492  1.00  0.00          Cl  
+TER      14       CL G   1
+HETATM   15 CO    CO H   1       2.761  -3.917   1.231  1.00  0.00          Co  
+TER      16       CO H   1
+HETATM   17 CS    CS I   1       2.360   4.168  -3.585  1.00  0.00          Cs  
+TER      18       CS I   1
+HETATM   19 Dy    Dy J   1       1.164   1.156   0.356  1.00  0.00          Dy  
+TER      20       Dy J   1
+HETATM   21 Er    Er K   1       5.575  -0.290  -2.326  1.00  0.00          Er  
+TER      22       Er K   1
+ENDMDL
+MODEL        4
+HETATM    1 AL    AL A   1      -2.469   1.951   4.639  1.00  0.00          Al  
+TER       2       AL A   1
+HETATM    3 BA    BA B   1      -2.516  -4.966  -1.373  1.00  0.00          Ba  
+TER       4       BA B   1
+HETATM    5 Be    Be C   1      -3.692   1.271  -1.692  1.00  0.00          Be  
+TER       6       Be C   1
+HETATM    7 BR    BR D   1      -3.209  -3.344   3.311  1.00  0.00          Br  
+TER       8       BR D   1
+HETATM    9 CA    CA E   1      -1.864   5.804  -0.749  1.00  0.00          Ca  
+TER      10       CA E   1
+HETATM   11 CD    CD F   1       0.943  -1.353  -3.627  1.00  0.00          Cd  
+TER      12       CD F   1
+HETATM   13 CL    CL G   1       4.052  -1.004   5.599  1.00  0.00          Cl  
+TER      14       CL G   1
+HETATM   15 CO    CO H   1       3.119  -4.073   1.348  1.00  0.00          Co  
+TER      16       CO H   1
+HETATM   17 CS    CS I   1       2.574   4.043  -3.694  1.00  0.00          Cs  
+TER      18       CS I   1
+HETATM   19 Dy    Dy J   1       1.171   1.164   0.287  1.00  0.00          Dy  
+TER      20       Dy J   1
+HETATM   21 Er    Er K   1       5.672  -0.341  -2.513  1.00  0.00          Er  
+TER      22       Er K   1
+ENDMDL
+MODEL        5
+HETATM    1 AL    AL A   1      -2.789   1.971   5.115  1.00  0.00          Al  
+TER       2       AL A   1
+HETATM    3 BA    BA B   1      -2.544  -5.077  -1.368  1.00  0.00          Ba  
+TER       4       BA B   1
+HETATM    5 Be    Be C   1      -3.811   1.252  -1.487  1.00  0.00          Be  
+TER       6       Be C   1
+HETATM    7 BR    BR D   1      -3.447  -3.248   3.514  1.00  0.00          Br  
+TER       8       BR D   1
+HETATM    9 CA    CA E   1      -2.133   5.823  -0.841  1.00  0.00          Ca  
+TER      10       CA E   1
+HETATM   11 CD    CD F   1       1.061  -1.245  -3.652  1.00  0.00          Cd  
+TER      12       CD F   1
+HETATM   13 CL    CL G   1       4.383  -1.476   5.461  1.00  0.00          Cl  
+TER      14       CL G   1
+HETATM   15 CO    CO H   1       3.344  -4.101   1.350  1.00  0.00          Co  
+TER      16       CO H   1
+HETATM   17 CS    CS I   1       2.768   4.006  -3.687  1.00  0.00          Cs  
+TER      18       CS I   1
+HETATM   19 Dy    Dy J   1       1.117   1.211   0.319  1.00  0.00          Dy  
+TER      20       Dy J   1
+HETATM   21 Er    Er K   1       5.747  -0.443  -2.755  1.00  0.00          Er  
+TER      22       Er K   1
+ENDMDL
+END

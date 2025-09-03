@@ -1,0 +1,20 @@
+{
+    "force_field_list": [
+        [
+            [
+                "leaprc.water.fb4",
+                "frcmod.ionsjc_tip4pew",
+                "frcmod.ions234lm_126_tip4pew"
+            ],
+            [
+                "tip4pfb_standard.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": [
+        "TOTAL",
+        "BONDS_UB",
+        "ANGLES"
+    ]
+}

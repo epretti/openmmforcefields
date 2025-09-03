@@ -1,0 +1,11 @@
+source leaprc.water.spce
+chain_1 = sequence { WAT }
+chain_2 = sequence { WAT }
+chain_3 = sequence { WAT }
+chain_4 = sequence { WAT }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

@@ -1,0 +1,19 @@
+{
+    "force_field_list": [
+        [
+            [
+                "leaprc.water.opc"
+            ],
+            [
+                "opc.xml",
+                "ions/ionslm_126_opc.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": [
+        "TOTAL",
+        "BONDS_UB",
+        "ANGLES"
+    ]
+}

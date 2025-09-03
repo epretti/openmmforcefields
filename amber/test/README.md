@@ -48,17 +48,35 @@ subdirectories) runs the full test suite.
 
 ## Limitations
 
-* ff03ua (the Amber united-atom force field) is not currently tested due to LEaP
-  failing to parameterize many simple systems.  It is not clear that there is an
-  easy way around this.
+* ff03ua (the Amber united-atom force field) is not currently covered by this
+  test suite due to issues with running LEaP using this force field.
+* Water bonded terms aren't tested since Amber and OpenMM handle them
+  differently (H-H bond vs. H-O-H angle): but since the distributed water models
+  are all rigid, this shouldn't matter.
+* Most of the force fields in `ions/` are not tested (other than the ones that
+  are imported by the solvent force field files in the parent directory, which
+  contain the recommended sets of ions).
+  * Some of the "recommended default" options that openmmforcefields distributes
+    are not (any more?) the ones that are used by default in AmberTools.
+    Specifically, TIP3PFB via `tip3pfb_*.xml` doesn't use its Li-Merz ion set
+    but instead uses a mix of Joung-Cheatham and Li-Merz ions for TIP3P.  The
+    same is true for TIP4PFB, which uses a mix of ions for TIP4P/Ew instead of
+    the Li-Merz TIP4PFB ions like Amber uses.  For now, the sets of parameters
+    that openmmforcefields distributes are tested, but this should be fixed.
+  * Because of the problems with the current conversion, there is no support for
+    testing Ag+, Cu+, or Tl+, and some force fields are missing these ions.
+* Comprehensive testing of GLYCAM is not yet implemented.
+
 * Currently failing due to problems with the conversion:
-  * ff03 endcaps require manual modification
-  * Problems with inconsistent improper peripheral atom ordering
+  * Need to make sure that edited impropers are actually correct
   * Other tests that need to be investigated
+    * Unknown nucleic acid problems
+    * Unknown protein problems
+    * Serious phospho-protein angle problems
+    * There's an issue with 4-site water models not matching in sander
+    * Some ions have the wrong Lennard-Jones parameters and it is not clear why
 * Remaining to be implemented:
-  * Tests for water and ions
-  * Tests for GLYCAM
-  * Tests with combinations of kinds of macromolecules
+  * Test CHARMM-style lipids
 
 ## Information for test case developers
 

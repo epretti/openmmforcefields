@@ -16,10 +16,10 @@ import subprocess
 import tempfile
 
 DEBUG = False
-OFFSET_DISTANCE = 20.0 # Å
+OFFSET_DISTANCE = 5.0 # Å
 PADDING_DISTANCE = 5.0 # Å
 FFXML_DIRECTORY = "../../openmmforcefields/ffxml/amber"
-SYSTEM_OPTIONS = dict(rigidWater=False, removeCMMotion=False, nonbondedMethod=openmm.app.NoCutoff)
+SYSTEM_OPTIONS = dict(rigidWater=True, removeCMMotion=False, nonbondedMethod=openmm.app.NoCutoff)
 HARMONIC_STRENGTH = 10.0 # kJ/mol/nm^2
 LANGEVIN_TEMPERATURE = 300.0 * openmm.unit.kelvin
 LANGEVIN_FRICTION = 1 / (100 * 0.002 * openmm.unit.picosecond)
@@ -67,7 +67,23 @@ class FF:
     RNA_OL3 = (["leaprc.RNA.OL3"], ["RNA.OL3.xml"])
     RNA_ROC = (["leaprc.RNA.ROC"], ["RNA.ROC.xml"])
     RNA_YIL = (["leaprc.RNA.YIL"], ["RNA.YIL.xml"])
-    # TODO: leaprc.GLYCAM_06j-1
+    SOLVENT_OPC = (["leaprc.water.opc"], ["opc.xml", "ions/ionslm_126_opc.xml"])
+    SOLVENT_OPC3 = (["leaprc.water.opc3"], ["opc3.xml", "ions/ionslm_126_opc3.xml"])
+    SOLVENT_SPCE_126 = (["leaprc.water.spce"], ["spce_standard.xml"])
+    SOLVENT_SPCE_HFE = (["leaprc.water.spce", "frcmod.ions234lm_hfe_spce"], ["spce_standard.xml", "spce_HFE_multivalent.xml"])
+    SOLVENT_SPCE_IOD = (["leaprc.water.spce", "frcmod.ions234lm_iod_spce"], ["spce_standard.xml", "spce_IOD_multivalent.xml"])
+    SOLVENT_TIP3PFB_126 = (["leaprc.water.fb3", "frcmod.ionsjc_tip3p", "frcmod.ions234lm_126_tip3p"], ["tip3pfb_standard.xml"])
+    SOLVENT_TIP3PFB_HFE = (["leaprc.water.fb3", "frcmod.ionsjc_tip3p", "frcmod.ions234lm_hfe_tip3p"], ["tip3pfb_standard.xml", "tip3pfb_HFE_multivalent.xml"])
+    SOLVENT_TIP3PFB_IOD = (["leaprc.water.fb3", "frcmod.ionsjc_tip3p", "frcmod.ions234lm_iod_tip3p"], ["tip3pfb_standard.xml", "tip3pfb_IOD_multivalent.xml"])
+    SOLVENT_TIP3P_126 = (["leaprc.water.tip3p"], ["tip3p_standard.xml"])
+    SOLVENT_TIP3P_HFE = (["leaprc.water.tip3p", "frcmod.ions234lm_hfe_tip3p"], ["tip3p_standard.xml", "tip3p_HFE_multivalent.xml"])
+    SOLVENT_TIP3P_IOD = (["leaprc.water.tip3p", "frcmod.ions234lm_iod_tip3p"], ["tip3p_standard.xml", "tip3p_IOD_multivalent.xml"])
+    SOLVENT_TIP4PEW_126 = (["leaprc.water.tip4pew"], ["tip4pew_standard.xml"])
+    SOLVENT_TIP4PEW_HFE = (["leaprc.water.tip4pew", "frcmod.ions234lm_hfe_tip4pew"], ["tip4pew_standard.xml", "tip4pew_HFE_multivalent.xml"])
+    SOLVENT_TIP4PEW_IOD = (["leaprc.water.tip4pew", "frcmod.ions234lm_iod_tip4pew"], ["tip4pew_standard.xml", "tip4pew_IOD_multivalent.xml"])
+    SOLVENT_TIP4PFB_126 = (["leaprc.water.fb4", "frcmod.ionsjc_tip4pew", "frcmod.ions234lm_126_tip4pew"], ["tip4pfb_standard.xml"])
+    SOLVENT_TIP4PFB_HFE = (["leaprc.water.fb4", "frcmod.ionsjc_tip4pew", "frcmod.ions234lm_hfe_tip4pew"], ["tip4pfb_standard.xml", "tip4pfb_HFE_multivalent.xml"])
+    SOLVENT_TIP4PFB_IOD = (["leaprc.water.fb4", "frcmod.ionsjc_tip4pew", "frcmod.ions234lm_iod_tip4pew"], ["tip4pfb_standard.xml", "tip4pfb_IOD_multivalent.xml"])
 
 def main():
     def get_test_name(name):
@@ -82,6 +98,66 @@ def main():
         for ff_item in ff_exclude:
             ff_list.remove(ff_item)
         return ff_list
+
+    # Water and ions:
+
+    water_ff = [
+        FF.SOLVENT_OPC,
+        FF.SOLVENT_OPC3,
+        FF.SOLVENT_SPCE_126,
+        FF.SOLVENT_TIP3PFB_126,
+        FF.SOLVENT_TIP3P_126,
+        FF.SOLVENT_TIP4PEW_126,
+        FF.SOLVENT_TIP4PFB_126,
+    ]
+    for index, ff in enumerate(water_ff):
+        # Amber bonds and angles are different, so exclude them and only test
+        # non-bonded energies (all water models are rigid in any case).
+        create_case(
+            [("WAT",), ("WAT",), ("WAT",), ("WAT",)],
+            ["test_case = sequence { $chains }"], [ff], get_test_name(f"water.{index + 1:02}"), skip_list=["TOTAL", "BONDS_UB", "ANGLES"], soften=True,
+        )
+
+    ions_ff = [
+        FF.SOLVENT_TIP3P_126,
+
+        FF.SOLVENT_OPC,
+        FF.SOLVENT_OPC3,
+        FF.SOLVENT_SPCE_126,
+        FF.SOLVENT_SPCE_HFE,
+        FF.SOLVENT_SPCE_IOD,
+        FF.SOLVENT_TIP3PFB_126,
+        FF.SOLVENT_TIP3PFB_HFE,
+        FF.SOLVENT_TIP3PFB_IOD,
+        FF.SOLVENT_TIP3P_HFE,
+        FF.SOLVENT_TIP3P_IOD,
+        FF.SOLVENT_TIP4PEW_126,
+        FF.SOLVENT_TIP4PEW_HFE,
+        FF.SOLVENT_TIP4PEW_IOD,
+        FF.SOLVENT_TIP4PFB_126,
+        FF.SOLVENT_TIP4PFB_HFE,
+        FF.SOLVENT_TIP4PFB_IOD,
+    ]
+    for index, ions in enumerate([
+        ('AL', 'BA', 'Be', 'BR', 'CA', 'CD', 'CL', 'CO', 'CS', 'Dy', 'Er'),
+        ('F', 'GD3', 'Hf', 'HG', 'IN', 'IOD', 'K', 'LA', 'LI', 'LU', 'MG'),
+        ('MN', 'NA', 'Nd', 'NI', 'PB', 'PD', 'PR', 'PT', 'Pu', 'Ra', 'RB'),
+        ('Sn', 'SR', 'TB', 'Th', 'Tm', 'U4+', 'V2+', 'Y', 'YB2', 'ZN', 'Zr'),
+    ]):
+        create_case(
+            [(name,) for name in ions],
+            ["test_case = sequence { $chains }"], ions_ff, get_test_name(f"ions.{index + 1:02}"),
+            element_list=[{"GD3": "Gd", "IOD": "I", "U4+": "U", "V2+": "V", "YB2": "Yb"}.get(name, name[0].upper() + name[1:].lower()) for name in ions], soften=True,
+        )
+    # Ag2+, Ce3+, Ce4+, Cr2+, Cr3+, Eu2+, Eu3+, Fe2+, Fe3+, Sm2+, Sm3+, and
+    # Tl3+.  The current conversions are missing some ions and need to be
+    # reworked, so there is no Ag+, Cu+, or Tl+ in most of the force fields yet.
+    create_case(
+        [("Ag",), ("CE",), ("Ce",), ("Cr",), ("CR",), ("CU",), ("EU",), ("EU3",), ("FE2",), ("FE",), ("Sm",), ("SM",), ("Tl",)],
+        ["test_case = sequence { $chains }"], ions_ff, get_test_name("ions.05"),
+        element_list=["Ag", "Ce", "Ce", "Cr", "Cr", "Cu", "Eu", "Eu", "Fe", "Fe", "Sm", "Sm", "Tl"],
+        template_list=["Ag", "CE", "Ce", "Cr", "CR", "CU", "EU", "EU3", "FE2", "FE", "Sm", "SM", "Tl"], soften=True,
+    )
 
     # Protein:
 
@@ -157,7 +233,7 @@ def main():
         # Force OpenMM to write all of the CONECT records to non-standard
         # residues: LEaP gives them standard names, so OpenMM misses the bonds
         # to extra protons.  Renaming them is a workaround.
-        [FF.PROTEIN_FF15IPQ, FF.PROTEIN_FF15IPQVAC, FF.PROTEIN_FF19IPQ], get_test_name("protein.12"), {"ASP": "XXX"},
+        [FF.PROTEIN_FF15IPQ, FF.PROTEIN_FF15IPQVAC, FF.PROTEIN_FF19IPQ], get_test_name("protein.12"), residue_name_replacements={"ASP": "XXX"},
     )
     # Hydroxyproline.
     create_case(
@@ -256,6 +332,11 @@ def main():
         ["test_case = sequence { $chains }"],
         rna_new_ff, get_test_name("nucleic.03"),
     )
+    create_case(
+        [("RA5", "RA", "RA", "RC", "RG", "RU", "RA", "RA3"), ("RA5", "RA", "RA3"), ("RC5", "RC", "RC3"), ("RG5", "RG", "RG3"), ("RU5", "RU", "RU3"), ("RAN",), ("RCN",), ("RGN",), ("RUN",)],
+        ["test_case = sequence { $chains }"],
+        rna_old_ff, get_test_name("nucleic.04"),
+    )
 
     # Lipids:
 
@@ -281,7 +362,7 @@ def main():
         ["set chain_1 tail null", "test_case = sequence { $chains }"],
         [FF.LIPID_17, FF.LIPID_21], get_test_name("lipid.04"),
     )
-    # Sphingomyelin is only supported by Lipid21.  Note that only SA can be
+    # Sphingomyelin is supported only by Lipid21.  Note that only SA can be
     # attached as the 2nd substituent to SPM; there aren't other parameters.
     create_case(
         [("AR", "SPM", "SA"), ("DHA", "SPM", "SA")],
@@ -295,7 +376,7 @@ def main():
         [FF.LIPID_21], get_test_name("lipid.06"),
     )
 
-def create_case(chains, leap_commands, force_field_list, output_prefix, residue_name_replacements=None):
+def create_case(chains, leap_commands, force_field_list, output_prefix, *, residue_name_replacements=None, element_list=None, template_list=None, skip_list=None, soften=False):
     """
     Creates a test case.  The LEaP commands should create an object test_case
     containing the topology for the test case from chains chain_1, chain_2, etc.
@@ -325,6 +406,9 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, residue_
 
         # Load the PDB generated by LEaP.
         pdb = openmm.app.PDBFile(os.path.join(temp_dir, "test.pdb"))
+        if element_list is not None:
+            for atom, element in zip(pdb.topology.atoms(), element_list, strict=True):
+                atom.element = openmm.app.element.get_by_symbol(element) if element is not None else None
         positions = numpy.array([position.value_in_unit(openmm.unit.angstrom) for position in pdb.positions])
 
     # We may have to patch up the PDB topology based on the prmtop if
@@ -349,7 +433,9 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, residue_
     for index_1, index_2 in sorted(prmtop_bonds - pdb_bonds):
         if DEBUG:
             print(f"Adding missing bond {pdb_atoms[index_1]} - {pdb_atoms[index_2]}")
-        pdb.topology.addBond(pdb_atoms[index_1], pdb_atoms[index_2])
+        if pdb_atoms[index_1].element and pdb_atoms[index_2].element:
+            # Don't add bonds if they involve virtual sites.
+            pdb.topology.addBond(pdb_atoms[index_1], pdb_atoms[index_2])
 
     # Complain about any bonds in the PDB that aren't in the prmtop.
     pdb_bonds_remove = []
@@ -394,7 +480,10 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, residue_
     # Create an OpenMM system.
     try:
         openmm_force_field = openmm.app.ForceField(*(os.path.join(FFXML_DIRECTORY, ffxml) for ffxml in main_ffxml_list))
-        system = openmm_force_field.createSystem(pdb.topology, **SYSTEM_OPTIONS)
+        system_options = SYSTEM_OPTIONS.copy()
+        if template_list is not None:
+            system_options["residueTemplates"] = {residue: name for residue, name in zip(pdb.topology.residues(), template_list, strict=True)}
+        system = openmm_force_field.createSystem(pdb.topology, **system_options)
     except Exception as exception:
         raise RuntimeError(main_force_field) from exception
 
@@ -410,15 +499,19 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, residue_
     nonbonded_force, = (force for force in system.getForces() if isinstance(force, openmm.NonbondedForce))
     for index in range(system.getNumParticles()):
         charge, sigma, epsilon = nonbonded_force.getParticleParameters(index)
-        if charge and not epsilon:
+        if soften:
+            nonbonded_force.setParticleParameters(index, 0.0, 0.5, 1.0 if epsilon else 0.0)
+        elif charge and not epsilon:
             nonbonded_force.setParticleParameters(index, 0.0, sigma, epsilon)
     for index in range(nonbonded_force.getNumExceptions()):
         index_1, index_2, charge, sigma, epsilon = nonbonded_force.getExceptionParameters(index)
-        if charge and not epsilon:
+        if soften:
+            nonbonded_force.setExceptionParameters(index, index_1, index_2, 0.0, 0.5, 1.0 if epsilon else 0.0)
+        elif charge and not epsilon:
             nonbonded_force.setExceptionParameters(index, index_1, index_2, 0.0, sigma, epsilon)
 
     # Generate an initial configuration by minimizing and integrating.
-    integrator = openmm.VariableLangevinIntegrator(LANGEVIN_TEMPERATURE, LANGEVIN_FRICTION, LANGEVIN_ERROR)
+    integrator = openmm.LangevinIntegrator(LANGEVIN_TEMPERATURE, LANGEVIN_FRICTION, LANGEVIN_ERROR)
     integrator.setRandomNumberSeed(RNG.integers(1 << 31))
     context = openmm.Context(system, integrator, openmm.Platform.getPlatformByName(OPENMM_PLATFORM))
     context.setPositions(positions * openmm.unit.angstrom)
@@ -471,13 +564,16 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, residue_
 
             # Make sure we can load the FFXML files for this test case.
             try:
-                openmm.app.ForceField(*(os.path.join(FFXML_DIRECTORY, ffxml) for ffxml in ffxml_list)).createSystem(test_pdb.topology, **SYSTEM_OPTIONS)
+                system_options = SYSTEM_OPTIONS.copy()
+                if template_list is not None:
+                    system_options["residueTemplates"] = {residue: name for residue, name in zip(test_pdb.topology.residues(), template_list, strict=True)}
+                openmm.app.ForceField(*(os.path.join(FFXML_DIRECTORY, ffxml) for ffxml in ffxml_list)).createSystem(test_pdb.topology, **system_options)
             except Exception as exception:
                 raise RuntimeError(force_field) from exception
 
     # Write a manifest of the force fields for this test case.
     with open(f"{output_prefix}.json", "w") as json_file:
-        json.dump(force_field_list, json_file, indent=4)
+        json.dump(dict(force_field_list=force_field_list, template_list=template_list, skip_list=skip_list), json_file, indent=4)
 
 def create_leap_input(temp_dir, leaprc_list, chains, leap_commands):
     """
@@ -486,7 +582,13 @@ def create_leap_input(temp_dir, leaprc_list, chains, leap_commands):
 
     with open(os.path.join(temp_dir, "test.leap"), "w") as leap_file:
         for leaprc in leaprc_list:
-            print(f"source {leaprc}", file=leap_file)
+            leaprc_basename = os.path.basename(leaprc)
+            if leaprc_basename.startswith("leaprc."):
+                print(f"source {leaprc}", file=leap_file)
+            elif leaprc_basename.startswith("frcmod."):
+                print(f"loadAmberParams {leaprc}", file=leap_file)
+            else:
+                raise ValueError(f"unknown LEaP input type for {leaprc_basename}")
         for index, chain in enumerate(chains):
             chain_string = " ".join(chain)
             print(f"chain_{index + 1} = sequence {{ {chain_string} }}", file=leap_file)
@@ -512,6 +614,9 @@ def run_leap(temp_dir):
     failed = result.returncode or "Exiting LEaP: Errors = 0" not in stdout
 
     if failed or DEBUG:
+        print("=" * 80, "LEaP input".center(80), "=" * 80, sep="\n")
+        with open(os.path.join(temp_dir, "test.leap"), "r") as leap_file:
+            print(leap_file.read())
         print("=" * 80, "LEaP output".center(80), "=" * 80, sep="\n")
         print(stdout)
         print("=" * 80)

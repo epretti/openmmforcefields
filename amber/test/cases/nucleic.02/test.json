@@ -1,58 +1,62 @@
-[
-    [
+{
+    "force_field_list": [
         [
-            "leaprc.RNA.OL3"
+            [
+                "leaprc.RNA.OL3"
+            ],
+            [
+                "RNA.OL3.xml"
+            ]
         ],
         [
-            "RNA.OL3.xml"
+            [
+                "oldff/leaprc.ff10"
+            ],
+            [
+                "ff10.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff14ipq"
+            ],
+            [
+                "ff14ipq.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff14SB"
+            ],
+            [
+                "ff14SB.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff14SB.redq"
+            ],
+            [
+                "ff14SB.redq.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.RNA.ROC"
+            ],
+            [
+                "RNA.ROC.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.RNA.YIL"
+            ],
+            [
+                "RNA.YIL.xml"
+            ]
         ]
     ],
-    [
-        [
-            "oldff/leaprc.ff10"
-        ],
-        [
-            "ff10.xml"
-        ]
-    ],
-    [
-        [
-            "oldff/leaprc.ff14ipq"
-        ],
-        [
-            "ff14ipq.xml"
-        ]
-    ],
-    [
-        [
-            "oldff/leaprc.ff14SB"
-        ],
-        [
-            "ff14SB.xml"
-        ]
-    ],
-    [
-        [
-            "oldff/leaprc.ff14SB.redq"
-        ],
-        [
-            "ff14SB.redq.xml"
-        ]
-    ],
-    [
-        [
-            "leaprc.RNA.ROC"
-        ],
-        [
-            "RNA.ROC.xml"
-        ]
-    ],
-    [
-        [
-            "leaprc.RNA.YIL"
-        ],
-        [
-            "RNA.YIL.xml"
-        ]
-    ]
-]
+    "template_list": null,
+    "skip_list": null
+}
