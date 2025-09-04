@@ -683,6 +683,15 @@ def run_leap(temp_dir):
     Calls LEaP on a LEaP input file created by `create_leap_input()`.
     """
 
+    # Write patched input files into the temporary directory.  These are various
+    # files distributed with AmberTools that need to be changed to work around
+    # LEaP bugs.  Since there are few of them, these are hard-coded for now.
+
+    # See https://github.com/openmm/openmmforcefields/issues/44#issuecomment-343880821
+    input_file = os.path.join(os.environ.get("AMBERHOME", "."), "dat", "leap", "parm", "parm15ipq_10.3.dat")
+    patch_file = os.path.join("ambertools_patches/parm15ipq_10.3.dat.patch")
+    subprocess.run(["patch", "-o", os.path.join(temp_dir, "parm15ipq_10.3.dat"), input_file, patch_file], check=True, capture_output=True)
+
     print("    Running LEaP...")
     result = subprocess.run(["tleap", "-f", "test.leap"], cwd=temp_dir, capture_output=True)
     stdout = result.stdout.decode()

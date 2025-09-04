@@ -46,7 +46,7 @@ that can be run with a number of force fields.  Passing `cases/*` as the
 `test_path` argument to `test_amber.py` in your shell (*i.e.*, selecting all
 subdirectories) runs the full test suite.
 
-## Limitations
+## Limitations and notes
 
 * ff03ua (the Amber united-atom force field) is not currently covered by this
   test suite due to issues with running LEaP using this force field.
@@ -66,16 +66,15 @@ subdirectories) runs the full test suite.
   * Because of the problems with the current conversion, there is no support for
     testing Ag+, Cu+, or Tl+, and some force fields are missing these ions.
 * Comprehensive testing of GLYCAM is not yet implemented.
-
-### Tests currently failing or incompletely implemented (TODO)
-
-* When we edit impropers to make Amber and OpenMM match, we need to make sure
-  that what OpenMM used matches what we want the documented behavior to be.
-* Tests that need to be investigated
-  * Issues with proper dihedrals in some protein and nucleic acid force fields
-  * Issues with some phosphorylated residue angle potentials
-  * Some 4-site water models don't match exactly in sander for some reason
-  * Some ions have the wrong Lennard-Jones parameters and it's not clear why
+* We need to check that the impropers in OpenMM are in the order that we want.
+* The following tests currently fail:
+  * Due to force field errors:
+    * Proper dihedrals: If ParmEd finds a wildcarded proper dihedral term and a
+      non-wildcarded proper dihedral term, we need to add the wildcarded terms
+      to matching non-wildcarded entries in the FFXML so that OpenMM finds them!
+  * For unknown reasons:
+    * Angle potentials in some force fields for some phosphorylated residues
+    * 4-site water models (water.01, water.06, water.07)
 
 ## Information for test case developers
 
