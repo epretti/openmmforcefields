@@ -67,16 +67,15 @@ subdirectories) runs the full test suite.
     testing Ag+, Cu+, or Tl+, and some force fields are missing these ions.
 * Comprehensive testing of GLYCAM is not yet implemented.
 
-* Currently failing due to problems with the conversion:
-  * Need to make sure that edited impropers are actually correct
-  * Other tests that need to be investigated
-    * Unknown nucleic acid problems
-    * Unknown protein problems
-    * Serious phospho-protein angle problems
-    * There's an issue with 4-site water models not matching in sander
-    * Some ions have the wrong Lennard-Jones parameters and it is not clear why
-* Remaining to be implemented:
-  * Test CHARMM-style lipids
+### Tests currently failing or incompletely implemented (TODO)
+
+* When we edit impropers to make Amber and OpenMM match, we need to make sure
+  that what OpenMM used matches what we want the documented behavior to be.
+* Tests that need to be investigated
+  * Issues with proper dihedrals in some protein and nucleic acid force fields
+  * Issues with some phosphorylated residue angle potentials
+  * Some 4-site water models don't match exactly in sander for some reason
+  * Some ions have the wrong Lennard-Jones parameters and it's not clear why
 
 ## Information for test case developers
 

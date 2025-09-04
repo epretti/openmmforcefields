@@ -27,6 +27,10 @@ DEFAULT_ABSOLUTE_TOLERANCE = 2e-4 # kcal/mol
 DEFAULT_RELATIVE_TOLERANCE = 2e-4
 DEFAULT_OPENMM_PLATFORM = "Reference"
 
+# Tolerance for "other" energy (should be zero, within Amber's energy printout
+# precision of 1e-4 kcal/mol times the number of terms rounded).
+OTHER_TOLERANCE = 5e-4 * openmm.unit.kilocalorie_per_mole
+
 MINIMUM_CUTOFF = 10.0 # Å
 SYSTEM_OPTIONS = dict(rigidWater=False, removeCMMotion=False, nonbondedMethod=openmm.app.NoCutoff)
 
@@ -43,6 +47,7 @@ class ForceGroup(enum.Enum):
     TORSIONS = 3
     CMAP = 4
     NONBONDED = 5
+    OTHER = 6
 
 # For each force group, the Amber labels and the OpenMM force types.
 FORCE_GROUP_DATA = {
@@ -300,16 +305,15 @@ class TestRunner:
 
             # Print results for energies.
             print(f"        {'Energy error':20}  {'|ΔE| (kcal/mol)':20}  {'Relative':12}")
-            for force_group in (None, *ForceGroup):
-                force_group_name = "TOTAL" if force_group is None else force_group.name
-                if skip_list is not None and force_group_name in skip_list:
+            for force_group in ForceGroup:
+                if skip_list is not None and force_group.name in skip_list:
                     continue
                 difference_data = []
                 for result_1, result_2 in zip(results_1, results_2):
                     energy_1 = result_1[force_group]
                     energy_2 = result_2[force_group]
                     difference_data.append((energy_1, energy_2, *self._compare_energies(energy_1, energy_2)))
-                failure_count += self._format_energy_difference_data("TOTAL" if force_group is None else force_group.name, difference_data)
+                failure_count += self._format_energy_difference_data(force_group.name, difference_data)
             print()
 
         return failure_count
@@ -384,14 +388,15 @@ class TestRunner:
 
             result = {}
             for force_group in ForceGroup:
+                if force_group is ForceGroup.OTHER:
+                    continue
                 result[force_group] = sum(energy_data.get(label, 0.0) for label in FORCE_GROUP_DATA[force_group][0]) * openmm.unit.kilocalorie_per_mole
-            result[None] = energy_data["EPtot"] * openmm.unit.kilocalorie_per_mole
+            result[ForceGroup.OTHER] = energy_data["EPtot"] * openmm.unit.kilocalorie_per_mole - sum((result[force_group] for force_group in ForceGroup if force_group is not ForceGroup.OTHER), start=0 * openmm.unit.kilocalorie_per_mole)
 
             # Do correction for Amber's value of the electric constant.
             electrostatic_energy = sum(energy_data.get(label, 0.0) for label in AMBER_ELECTROSTATIC_GROUPS) * openmm.unit.kilocalorie_per_mole
             electrostatic_shift = electrostatic_energy * (AMBER_ELECTROSTATIC_SCALE - 1.0)
             result[ForceGroup.NONBONDED] += electrostatic_shift
-            result[None] += electrostatic_shift
 
             results.append(result)
 
@@ -574,6 +579,8 @@ class TestRunner:
         # Set force groups of all forces in the System.
         for force_index, force in enumerate(system.getForces()):
             for force_group in ForceGroup:
+                if force_group is ForceGroup.OTHER:
+                    continue
                 if isinstance(force, FORCE_GROUP_DATA[force_group][1]):
                     force.setForceGroup(force_group.value)
                     break
@@ -594,14 +601,16 @@ class TestRunner:
 
             result = {}
 
-            # Evaluate energies for the entire system.
-            state = context.getState(getEnergy=True)
-            result[None] = state.getPotentialEnergy()
-
             # Evaluate energies for each force group.
             for force_group in ForceGroup:
+                if force_group is ForceGroup.OTHER:
+                    continue
                 state = context.getState(getEnergy=True, groups={force_group.value})
                 result[force_group] = state.getPotentialEnergy()
+
+            # Evaluate energies for the entire system.
+            state = context.getState(getEnergy=True)
+            result[ForceGroup.OTHER] = state.getPotentialEnergy() - sum((result[force_group] for force_group in ForceGroup if force_group is not ForceGroup.OTHER), start=0 * openmm.unit.kilocalorie_per_mole)
 
             results.append(result)
 
@@ -654,7 +663,7 @@ class TestRunner:
 
         energies_1, energies_2, absolute_differences, relative_differences = zip(*difference_data)
         failures = [
-            absolute_difference > self.absolute_tolerance and relative_difference > self.relative_tolerance
+            absolute_difference > (OTHER_TOLERANCE if label == "OTHER" else self.absolute_tolerance) and relative_difference > self.relative_tolerance
             for absolute_difference, relative_difference in zip(absolute_differences, relative_differences)
         ]
 

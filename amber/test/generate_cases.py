@@ -8,6 +8,7 @@ testing, so the force field used in test case generation need not correspond
 with the final force fields used for running the test case.
 """
 
+import csv
 import json
 import numpy
 import openmm.app
@@ -36,7 +37,9 @@ class FF:
     DNA_OL15 = (["leaprc.DNA.OL15"], ["DNA.OL15.xml"])
     DNA_OL21 = (["leaprc.DNA.OL21"], ["DNA.OL21.xml"])
     LIPID_17 = (["oldff/leaprc.lipid17"], ["lipid17.xml"])
+    LIPID_17_MERGED = (["oldff/leaprc.lipid17"], ["lipid17_merged.xml"])
     LIPID_21 = (["leaprc.lipid21"], ["lipid21.xml"])
+    LIPID_21_MERGED = (["leaprc.lipid21"], ["lipid21_merged.xml"])
     MULTI_AM1 = (["leaprc.ffAM1"], ["ffAM1.xml"])
     MULTI_FF03 = (["oldff/leaprc.ff03"], ["ff03.xml"])
     MULTI_FF10 = (["oldff/leaprc.ff10"], ["ff10.xml"])
@@ -139,10 +142,10 @@ def main():
         FF.SOLVENT_TIP4PFB_IOD,
     ]
     for index, ions in enumerate([
-        ('AL', 'BA', 'Be', 'BR', 'CA', 'CD', 'CL', 'CO', 'CS', 'Dy', 'Er'),
-        ('F', 'GD3', 'Hf', 'HG', 'IN', 'IOD', 'K', 'LA', 'LI', 'LU', 'MG'),
-        ('MN', 'NA', 'Nd', 'NI', 'PB', 'PD', 'PR', 'PT', 'Pu', 'Ra', 'RB'),
-        ('Sn', 'SR', 'TB', 'Th', 'Tm', 'U4+', 'V2+', 'Y', 'YB2', 'ZN', 'Zr'),
+        ("AL", "BA", "Be", "BR", "CA", "CD", "CL", "CO", "CS", "Dy", "Er"),
+        ("F", "GD3", "Hf", "HG", "IN", "IOD", "K", "LA", "LI", "LU", "MG"),
+        ("MN", "NA", "Nd", "NI", "PB", "PD", "PR", "PT", "Pu", "Ra", "RB"),
+        ("Sn", "SR", "TB", "Th", "Tm", "U4+", "V2+", "Y", "YB2", "ZN", "Zr"),
     ]):
         create_case(
             [(name,) for name in ions],
@@ -375,8 +378,75 @@ def main():
         ["set chain_1 tail null", "test_case = sequence { $chains }"],
         [FF.LIPID_21], get_test_name("lipid.06"),
     )
+    # Lipids in merged (CHARMM-style) topology format.
+    charmm_lipid_data = load_charmm_lipid_data()
+    for index, residues in enumerate([
+        ("CHL1", "DAPA", "DAPC", "DAPE", "DAPG", "DAPS"),
+        ("DLPA", "DLPC", "DLPE", "DLPG", "DLPS", "DMPA"),
+        ("DMPC", "DMPE", "DMPG", "DMPS", "DOPA", "DOPC"),
+        ("DOPE", "DOPG", "DOPS", "DPPA", "DPPC", "DPPE"),
+        ("DPPG", "DPPS", "DSPA", "DSPC", "DSPE", "DSPG"),
+        ("DSPS", "POPA", "POPC", "POPE", "POPG", "POPS"),
+        ("SDPA", "SDPC", "SDPE", "SDPG", "SDPS"),
+    ]):
+        create_case(
+            [charmm_lipid_data[residue] for residue in residues],
+            [f"set chain_{index + 1} tail null" for index in range(len(residues) - 1)] + ["test_case = sequence { $chains }"],
+            [FF.LIPID_17_MERGED, FF.LIPID_21_MERGED], get_test_name(f"lipid.{index + 7:02}"), charmm_lipid_data=charmm_lipid_data, charmm_lipids=residues,
+        )
 
-def create_case(chains, leap_commands, force_field_list, output_prefix, *, residue_name_replacements=None, element_list=None, template_list=None, skip_list=None, soften=False):
+def load_charmm_lipid_data():
+    """
+    Loads charmmlipid2amber.csv.
+    """
+
+    lipid_data = {}
+    with open(os.path.join(os.environ.get("AMBERHOME", "."), "dat", "charmmlipid2amber", "charmmlipid2amber.csv"), newline="") as csv_file:
+        csv_file.readline()
+        csv_file.readline()
+        csv_reader = csv.reader(csv_file)
+        for charmm_residue, _, charmm_name, amber_name, _, _ in csv_reader:
+            _, charmm_residue_name = charmm_name.strip().split()
+            _, amber_residue_name = amber_name.strip().split()
+            if charmm_residue != charmm_residue_name:
+                raise ValueError(charmm_residue)
+            residue_data = lipid_data.setdefault(charmm_residue_name, [])
+            if not residue_data or residue_data[-1] != amber_residue_name:
+                residue_data.append(amber_residue_name)
+    return lipid_data
+
+def patch_charmm_lipid_topology(topology, charmm_lipid_data, charmm_lipids):
+    """
+    Converts a topology with Amber-style lipid residues into one with CHARMM-
+    style lipid residues.
+    """
+
+    old_residues = list(topology.residues())
+    old_residue_index = 0
+    new_topology = openmm.app.Topology()
+    new_atoms = []
+
+    for residue in charmm_lipids:
+        new_chain = new_topology.addChain()
+        new_residue = new_topology.addResidue(residue, new_chain)
+        atom_index = 0
+        for amber_residue in charmm_lipid_data[residue]:
+            old_residue = old_residues[old_residue_index]
+            old_residue_index += 1
+            if old_residue.name != amber_residue:
+                raise ValueError(old_residue.name)
+            for old_atom in old_residue.atoms():
+                new_atom = new_topology.addAtom(f"X{atom_index:03}", old_atom.element, new_residue)
+                new_atoms.append(new_atom)
+                atom_index += 1
+    for bond in topology.bonds():
+        new_topology.addBond(new_atoms[bond.atom1.index], new_atoms[bond.atom2.index])
+
+    return new_topology
+
+def create_case(chains, leap_commands, force_field_list, output_prefix, *,
+    residue_name_replacements=None, element_list=None, template_list=None,
+    skip_list=None, soften=False, charmm_lipid_data=None, charmm_lipids=None):
     """
     Creates a test case.  The LEaP commands should create an object test_case
     containing the topology for the test case from chains chain_1, chain_2, etc.
@@ -410,6 +480,12 @@ def create_case(chains, leap_commands, force_field_list, output_prefix, *, resid
             for atom, element in zip(pdb.topology.atoms(), element_list, strict=True):
                 atom.element = openmm.app.element.get_by_symbol(element) if element is not None else None
         positions = numpy.array([position.value_in_unit(openmm.unit.angstrom) for position in pdb.positions])
+
+    # If this PDB was generated using LEaP with Amber-style lipid topologies,
+    # and we are testing CHARMM-style lipid topologies, patch up the topology
+    # read from the PDB.
+    if charmm_lipids is not None:
+        pdb.topology = patch_charmm_lipid_topology(pdb.topology, charmm_lipid_data, charmm_lipids)
 
     # We may have to patch up the PDB topology based on the prmtop if
     # non-standard residues were involved.  Find the bonds in the PDB and the

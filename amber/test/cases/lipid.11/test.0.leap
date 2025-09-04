@@ -1,0 +1,18 @@
+source oldff/leaprc.lipid17
+chain_1 = sequence { PA PGR PA }
+chain_2 = sequence { PA PS PA }
+chain_3 = sequence { ST PH- ST }
+chain_4 = sequence { ST PC ST }
+chain_5 = sequence { ST PE ST }
+chain_6 = sequence { ST PGR ST }
+set chain_1 tail null
+set chain_2 tail null
+set chain_3 tail null
+set chain_4 tail null
+set chain_5 tail null
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
