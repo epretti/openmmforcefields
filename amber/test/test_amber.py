@@ -539,6 +539,8 @@ class TestRunner:
                 impropers[improper_key] = (term_index, indices)
             return impropers
 
+        # Make sure that there are no serious discrepancies (central atom
+        # mismatch or wrong peripheral atoms altogether).
         ffxml_impropers = get_impropers(ffxml_torsion)
         prmtop_impropers = get_impropers(prmtop_torsion)
         ffxml_improper_keys = set(ffxml_impropers)
@@ -546,11 +548,21 @@ class TestRunner:
         if ffxml_improper_keys - prmtop_improper_keys or prmtop_improper_keys - ffxml_improper_keys:
             raise ValueError("impropers do not match (worse than peripheral atoms out of order)")
 
-        different_impropers = {}
+        # Find the impropers whose orderings differ between LEaP and OpenMM.
         for improper_key, (ffxml_term_index, ffxml_improper) in ffxml_impropers.items():
             prmtop_term_index, prmtop_improper = prmtop_impropers[improper_key]
             if min(ffxml_improper, ffxml_improper[::-1]) != min(prmtop_improper, prmtop_improper[::-1]):
-                different_impropers[improper_key] = (ffxml_term_index, prmtop_term_index, ffxml_improper, prmtop_improper)
+                *ffxml_indices, ffxml_periodicity, ffxml_phase, ffxml_force_constant = ffxml_torsion.getTorsionParameters(ffxml_term_index)
+                *prmtop_indices, prmtop_periodicity, prmtop_phase, prmtop_force_constant = prmtop_torsion.getTorsionParameters(prmtop_term_index)
+                if (tuple(ffxml_indices) != ffxml_improper or tuple(prmtop_indices) != prmtop_improper or ffxml_periodicity != prmtop_periodicity
+                        or not numpy.isclose(ffxml_phase.value_in_unit(openmm.unit.radian), prmtop_phase.value_in_unit(openmm.unit.radian))
+                        or not numpy.isclose(ffxml_force_constant.value_in_unit(openmm.unit.kilojoule_per_mole), prmtop_force_constant.value_in_unit(openmm.unit.kilojoule_per_mole))):
+                    raise ValueError("inconsistency in improper comparison")
+                ffxml_torsion.setTorsionParameters(ffxml_term_index, *prmtop_indices, ffxml_periodicity, ffxml_phase, ffxml_force_constant)
+
+        # TODO: verify that the impropers we replaced with LEaP's impropers (to
+        # be bug-compatible with LEaP for the test) actually were the impropers
+        # that we wanted OpenMM to assign.
 
     def _evaluate_openmm(self, system, coordinates_list, dump_prefix, topology):
         """
