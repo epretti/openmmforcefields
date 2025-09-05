@@ -1,0 +1,18 @@
+source leaprc.lipid21
+chain_1 = sequence { CHL }
+chain_2 = sequence { AR PH- AR }
+chain_3 = sequence { AR PC AR }
+chain_4 = sequence { AR PE AR }
+chain_5 = sequence { AR PGR AR }
+chain_6 = sequence { AR PS AR }
+set chain_1 tail null
+set chain_2 tail null
+set chain_3 tail null
+set chain_4 tail null
+set chain_5 tail null
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
