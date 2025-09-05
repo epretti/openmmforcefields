@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1 Sn    Sn A   1      -4.512  -0.733   2.713  1.00  0.00          Sn  
 TER       2       Sn A   1

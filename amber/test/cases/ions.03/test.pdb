@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1 MN    MN A   1      -5.546  -0.332  -2.698  1.00  0.00          Mn  
 TER       2       MN A   1

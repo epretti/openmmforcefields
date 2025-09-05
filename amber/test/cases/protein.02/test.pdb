@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 ATOM      1  N   ASP A   1      -8.043  -2.444   3.182  1.00  0.00           N  
 ATOM      2  H   ASP A   1      -8.729  -2.348   3.910  1.00  0.00           H  

@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1  H1  ACE A   1      -9.710   0.580   2.444  1.00  0.00           H  
 HETATM    2  CH3 ACE A   1      -8.780   0.108   2.711  1.00  0.00           C  

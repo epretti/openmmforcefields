@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 ATOM      1  N   HIS A   1      -6.243  -4.656   4.196  1.00  0.00           N  
 ATOM      2  H   HIS A   1      -5.375  -4.336   4.629  1.00  0.00           H  

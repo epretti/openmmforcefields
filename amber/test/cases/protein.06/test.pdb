@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 ATOM      1  N   PRO A   1      -4.777  -1.288  -1.567  1.00  0.00           N  
 ATOM      2  H2  PRO A   1      -5.092  -1.330  -0.581  1.00  0.00           H  

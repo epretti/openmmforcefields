@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1  C1  CHL A   1       1.744   1.424  -3.507  1.00  0.00           C  
 HETATM    2  H11 CHL A   1       0.931   1.097  -4.123  1.00  0.00           H  

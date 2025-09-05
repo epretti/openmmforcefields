@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 ATOM      1  N   ALA A   1      -7.358   1.525  -0.493  1.00  0.00           N  
 ATOM      2  H   ALA A   1      -6.798   2.351  -0.344  1.00  0.00           H  

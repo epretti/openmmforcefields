@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 ATOM      1 HO5'   A A   1      -6.429 -11.506 -11.562  1.00  0.00           H  
 ATOM      2  O5'   A A   1      -6.845 -11.900 -10.791  1.00  0.00           O  

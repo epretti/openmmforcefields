@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1 HO5'  AN A   1      -7.716   8.561   0.096  1.00  0.00           H  
 HETATM    2  O5'  AN A   1      -7.040   8.350  -0.565  1.00  0.00           O  

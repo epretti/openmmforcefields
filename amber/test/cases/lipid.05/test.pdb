@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1 C116  AR A   1      -7.294  -0.733  -0.949  1.00  0.00           C  
 HETATM    2 H16R  AR A   1      -8.090  -0.363  -1.616  1.00  0.00           H  

@@ -1,4 +1,4 @@
-REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-03
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
 MODEL        1
 HETATM    1 H14T  MY A   1      -1.754   1.824   0.751  1.00  0.00           H  
 HETATM    2 C114  MY A   1      -1.736   1.031   0.043  1.00  0.00           C  
