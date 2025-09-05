@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-04-30</DateGenerated>
+    <DateGenerated>2025-09-05</DateGenerated>
     <Source Source="oldff/leaprc.ff14SB" md5hash="7f016ac76ca64b68cb03725d6d370de8" sourcePackage="AmberTools" sourcePackageVersion="24.8">oldff/leaprc.ff14SB</Source>
     <Reference>Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015). ff14SB: Improving the Accuracy of Protein Side Chain and Backbone Parameters from ff99SB. J. Chem. Theory Comput. 11, 3696-3713.</Reference>
   </Info>
@@ -45,6 +45,7 @@
     <Type element="O" name="O2" class="O2" mass="16.0"/>
     <Type element="O" name="OH" class="OH" mass="16.0"/>
     <Type element="O" name="OS" class="OS" mass="16.0"/>
+    <Type element="O" name="OP" class="OP" mass="16.0"/>
     <Type element="P" name="P" class="P" mass="30.97"/>
     <Type element="S" name="S" class="S" mass="32.06"/>
     <Type element="S" name="SH" class="SH" mass="32.06"/>
@@ -5082,6 +5083,7 @@
     <Bond class1="CV" class2="NB" length="0.1394" k="343087.99999999994"/>
     <Bond class1="CW" class2="H4" length="0.10800000000000001" k="307105.5999999999"/>
     <Bond class1="CW" class2="NA" length="0.1381" k="357313.5999999999"/>
+    <Bond class1="OP" class2="P" length="0.148" k="439319.99999999994"/>
     <Bond class1="O2" class2="P" length="0.148" k="439319.99999999994"/>
     <Bond class1="OH" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
     <Bond class1="OS" class2="P" length="0.16100000000000003" k="192463.99999999997"/>
@@ -5153,6 +5155,7 @@
     <Angle class1="CA" class2="C" class3="OS" angle="2.0943951023931953" k="585.76"/>
     <Angle class1="CC" class2="NA" class3="P" angle="2.1834068942449063" k="641.8256"/>
     <Angle class1="CR" class2="NA" class3="P" angle="2.1834068942449063" k="641.8256"/>
+    <Angle class1="NA" class2="P" class3="OP" angle="1.7868680881917944" k="358.98720000000003"/>
     <Angle class1="CB" class2="C" class3="NA" angle="1.9425514574696887" k="585.76"/>
     <Angle class1="CB" class2="C" class3="O" angle="2.2479840765686965" k="669.44"/>
     <Angle class1="CM" class2="C" class3="NA" angle="1.99142067652553" k="585.76"/>
@@ -5425,6 +5428,8 @@
     <Angle class1="P" class2="OS" class3="P" angle="2.1031217486531673" k="836.8000000000001"/>
     <Angle class1="O2" class2="P" class3="OH" angle="1.888969849433463" k="376.56"/>
     <Angle class1="O2" class2="P" class3="O2" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="OP" class2="P" class3="OP" angle="2.092649773141201" k="1171.52"/>
+    <Angle class1="OP" class2="P" class3="OS" angle="1.888969849433463" k="836.8000000000001"/>
     <Angle class1="O2" class2="P" class3="OS" angle="1.888969849433463" k="836.8000000000001"/>
     <Angle class1="OH" class2="P" class3="OS" angle="1.790707812546182" k="376.56"/>
     <Angle class1="OS" class2="P" class3="OS" angle="1.790707812546182" k="376.56"/>
@@ -5678,6 +5683,9 @@
     <Proper class1="H1" class2="CT" class3="CI" class4="OS" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper class1="H1" class2="CT" class3="CI" class4="OH" periodicity1="3" phase1="0.0" k1="0.0" periodicity2="1" phase2="0.0" k2="1.046"/>
     <Proper class1="CI" class2="CT" class3="CT" class4="CT" periodicity1="3" phase1="0.0" k1="0.75312" periodicity2="2" phase2="3.141592653589793" k2="1.046" periodicity3="1" phase3="3.141592653589793" k3="0.8368000000000001"/>
+    <Proper class1="OP" class2="P" class3="OS" class4="CA" periodicity1="3" phase1="3.141592653589793" k1="0.0" periodicity2="1" phase2="3.141592653589793" k2="0.0"/>
+    <Proper class1="CC" class2="NA" class3="P" class4="OP" periodicity1="3" phase1="0.0" k1="1.00416"/>
+    <Proper class1="CR" class2="NA" class3="P" class4="OP" periodicity1="3" phase1="0.0" k1="0.0"/>
     <Proper class1="OS" class2="P" class3="OS" class4="CI" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
     <Proper class1="OH" class2="P" class3="OS" class4="CI" periodicity1="1" phase1="0.5549288319349986" k1="0.7747973040000001" periodicity2="2" phase2="6.142853854002235" k2="5.257325704" periodicity3="3" phase3="6.235144770452592" k3="1.484725872"/>
     <Proper class1="CT" class2="CT" class3="CI" class4="OS" periodicity1="1" phase1="3.3331692425337263" k1="4.92891936" periodicity2="2" phase2="5.159765562356967" k2="0.385354768" periodicity3="3" phase3="6.0754099683820435" k3="4.02848072"/>
@@ -5890,7 +5898,7 @@
     <Improper class1="NA" class2="" class3="" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper class1="CA" class2="" class3="N2" class4="N2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper class1="N" class2="" class3="CT" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
-    <Improper class1="N" class2="" class3="CX" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="N" class2="" class3="CT" class4="CX" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper class1="CA" class2="" class3="" class4="HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="CW" class2="" class3="" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="CR" class2="" class3="" class4="H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
@@ -5933,27 +5941,27 @@
     <Improper class1="N" class2="C" class3="CX" class4="H" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="N" class2="C" class3="CT" class4="O" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="C5" class2="" class3="" class4="H5" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper class1="N*" class2="C5" class3="CB" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
+    <Improper class1="N*" class2="CB" class3="C5" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper class1="C4" class2="" class3="" class4="H4" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="C4" class2="" class3="" class4="HA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="N*" class2="C" class3="C4" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.184"/>
     <Improper class1="C4" class2="C" class3="C4" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="CA" class2="C4" class3="N2" class4="NC" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
     <Improper class1="C" class2="CA" class3="CA" class4="OS" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper class1="NA" class2="CC" class3="CR" class4="P" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
-    <Improper class1="CB" class2="C*" class3="CA" class4="CN" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CN" class2="CA" class3="CB" class4="NA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CB" class2="CB" class3="N*" class4="NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CB" class2="C" class3="CB" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CB" class2="CA" class3="CB" class4="NB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CJ" class2="H1" class3="H1" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CJ" class2="CT" class3="H1" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CJ" class2="CT" class3="H1" class4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CJ" class2="H1" class3="H1" class4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
-    <Improper class1="CJ" class2="CT" class3="H1" class4="OS" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="NA" class2="CR" class3="CC" class4="P" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CB" class2="C*" class3="CN" class4="CA" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CN" class2="NA" class3="CA" class4="CB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CB" class2="N*" class3="CB" class4="NC" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CB" class2="NB" class3="C" class4="CB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CB" class2="NB" class3="CA" class4="CB" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="OH" class3="H1" class4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="OH" class3="H1" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="H1" class3="H1" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="OS" class3="H1" class4="H1" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
+    <Improper class1="CJ" class2="OS" class3="H1" class4="CT" periodicity1="2" phase1="3.141592653589793" k1="0.0"/>
     <Improper class1="CO" class2="" class3="O2" class4="O2" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
     <Improper class1="C" class2="2C" class3="O" class4="OH" periodicity1="2" phase1="3.141592653589793" k1="43.932"/>
-    <Improper class1="CA" class2="2C" class3="CA" class4="CA" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
+    <Improper class1="CA" class2="CA" class3="CA" class4="2C" periodicity1="2" phase1="3.141592653589793" k1="4.6024"/>
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge"/>
@@ -5997,6 +6005,7 @@
     <Atom class="O2" sigma="0.2959921901149463" epsilon="0.87864"/>
     <Atom class="OH" sigma="0.3066473387839048" epsilon="0.8803136"/>
     <Atom class="OS" sigma="0.3000012343465779" epsilon="0.7112800000000001"/>
+    <Atom class="OP" sigma="0.3296325257119256" epsilon="0.7112800000000001"/>
     <Atom class="P" sigma="0.37417746161894255" epsilon="0.8368000000000001"/>
     <Atom class="S" sigma="0.35635948725613575" epsilon="1.046"/>
     <Atom class="SH" sigma="0.35635948725613575" epsilon="1.046"/>
