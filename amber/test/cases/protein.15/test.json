@@ -1,0 +1,54 @@
+{
+    "force_field_list": [
+        [
+            [
+                "oldff/leaprc.ff14SB",
+                "leaprc.phosaa14SB"
+            ],
+            [
+                "ff14SB.xml",
+                "phosaa14SB.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff10"
+            ],
+            [
+                "ff10.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff99SB",
+                "leaprc.phosaa10"
+            ],
+            [
+                "ff99SB.xml",
+                "phosaa10.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.ff19SB",
+                "leaprc.phosaa19SB"
+            ],
+            [
+                "protein.ff19SB.xml",
+                "phosaa19SB.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.fb15",
+                "leaprc.phosfb18"
+            ],
+            [
+                "protein.fb15.xml",
+                "phosfb18.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": null
+}

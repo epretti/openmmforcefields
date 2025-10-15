@@ -1,0 +1,19 @@
+source leaprc.water.tip4pew
+loadAmberParams frcmod.ions234lm_iod_tip4pew
+chain_1 = sequence { MN }
+chain_2 = sequence { NA }
+chain_3 = sequence { Nd }
+chain_4 = sequence { NI }
+chain_5 = sequence { PB }
+chain_6 = sequence { PD }
+chain_7 = sequence { PR }
+chain_8 = sequence { PT }
+chain_9 = sequence { Pu }
+chain_10 = sequence { Ra }
+chain_11 = sequence { RB }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 chain_9 chain_10 chain_11 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

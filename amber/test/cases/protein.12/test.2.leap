@@ -1,0 +1,14 @@
+source leaprc.protein.ff19ipq
+chain_1 = sequence { ACE CYX NME MTB }
+chain_2 = sequence { NNLE NLE NLE NLE CNLE }
+chain_3 = sequence { NASH ALA CASH }
+chain_4 = sequence { NCYM ALA CCYM }
+chain_5 = sequence { NGLH ALA CGLH }
+chain_6 = sequence { NALA ALA CLYN }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 }
+bond test_case.2.SG test_case.4.SG
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

@@ -1,0 +1,10 @@
+source oldff/leaprc.ff96
+chain_1 = sequence { ACE CYS CYS CYS NME }
+chain_2 = sequence { ACE CYS CYS CYS NHE }
+set chain_1 tail null
+test_case = sequence { chain_1 chain_2 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

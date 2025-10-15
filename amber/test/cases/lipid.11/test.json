@@ -1,0 +1,22 @@
+{
+    "force_field_list": [
+        [
+            [
+                "oldff/leaprc.lipid17"
+            ],
+            [
+                "lipid17_merged.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.lipid21"
+            ],
+            [
+                "lipid21_merged.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": null
+}

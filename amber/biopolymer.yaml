@@ -120,7 +120,7 @@
   CMAPFRCMOD: files/ff19SB/frcmod.ff19SB_only_cmap
   Prefix: protein
   Options:
-    keep_types: ["P"]
+    keep_types: ["P", "OP"]
     override_level:
       HYP: 2
       CHYP: 2
@@ -336,6 +336,7 @@
     override_level:
       HYP: 2
       CHYP: 2
+    keep_types: ["OP"]
   Reference:
   - >-
     Maier, J.A., Martinez, C., Kasavajhala, K., Wickstrom, L., Hauser, K.E., and Simmerling, C. (2015).

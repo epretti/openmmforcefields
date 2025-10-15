@@ -1,0 +1,54 @@
+{
+    "force_field_list": [
+        [
+            [
+                "leaprc.protein.ff14SB"
+            ],
+            [
+                "protein.ff14SB.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff10"
+            ],
+            [
+                "ff10.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff14SB"
+            ],
+            [
+                "ff14SB.xml"
+            ]
+        ],
+        [
+            [
+                "oldff/leaprc.ff14SB.redq"
+            ],
+            [
+                "ff14SB.redq.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.ff14SBonlysc"
+            ],
+            [
+                "protein.ff14SBonlysc.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.ff19SB"
+            ],
+            [
+                "protein.ff19SB.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": null
+}

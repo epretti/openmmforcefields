@@ -1,0 +1,10 @@
+source leaprc.protein.ff14SB
+chain_1 = sequence { NHIP HIP HIP HIP CHIP }
+chain_2 = sequence { NILE ILE ILE ILE CILE }
+chain_3 = sequence { NLEU LEU LEU LEU CLEU }
+test_case = sequence { chain_1 chain_2 chain_3 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
