@@ -1,0 +1,92 @@
+REMARK   1 CREATED WITH OPENMM 8.3, 2025-09-05
+MODEL        1
+HETATM    1  O   HOH A   1      -2.417  -1.010  -0.053  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      -2.585  -1.615   0.698  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -2.495  -0.083   0.251  1.00  0.00           H  
+TER       4      HOH A   1
+HETATM    5  O   HOH B   1       0.242   2.044   2.361  1.00  0.00           O  
+HETATM    6  H1  HOH B   1       0.596   1.875   1.464  1.00  0.00           H  
+HETATM    7  H2  HOH B   1       0.193   3.009   2.516  1.00  0.00           H  
+TER       8      HOH B   1
+HETATM    9  O   HOH C   1       1.286   1.814  -2.595  1.00  0.00           O  
+HETATM   10  H1  HOH C   1       0.938   0.900  -2.647  1.00  0.00           H  
+HETATM   11  H2  HOH C   1       0.763   2.396  -3.182  1.00  0.00           H  
+TER      12      HOH C   1
+HETATM   13  O   HOH D   1       2.402  -1.688   0.534  1.00  0.00           O  
+HETATM   14  H1  HOH D   1       3.345  -1.468   0.391  1.00  0.00           H  
+HETATM   15  H2  HOH D   1       1.841  -0.978   0.162  1.00  0.00           H  
+TER      16      HOH D   1
+ENDMDL
+MODEL        2
+HETATM    1  O   HOH A   1      -2.776  -0.868   0.164  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      -2.785  -1.810  -0.104  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -1.867  -0.610   0.419  1.00  0.00           H  
+TER       4      HOH A   1
+HETATM    5  O   HOH B   1       0.731   2.570   2.461  1.00  0.00           O  
+HETATM    6  H1  HOH B   1       1.176   2.796   1.619  1.00  0.00           H  
+HETATM    7  H2  HOH B   1       1.397   2.509   3.176  1.00  0.00           H  
+TER       8      HOH B   1
+HETATM    9  O   HOH C   1       1.670   1.844  -2.830  1.00  0.00           O  
+HETATM   10  H1  HOH C   1       1.375   0.917  -2.720  1.00  0.00           H  
+HETATM   11  H2  HOH C   1       0.989   2.449  -2.471  1.00  0.00           H  
+TER      12      HOH C   1
+HETATM   13  O   HOH D   1       2.622  -1.926   0.686  1.00  0.00           O  
+HETATM   14  H1  HOH D   1       3.317  -2.298   1.265  1.00  0.00           H  
+HETATM   15  H2  HOH D   1       2.805  -2.173  -0.244  1.00  0.00           H  
+TER      16      HOH D   1
+ENDMDL
+MODEL        3
+HETATM    1  O   HOH A   1      -3.014  -0.282   0.140  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      -3.258   0.550  -0.314  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -3.424  -0.302   1.029  1.00  0.00           H  
+TER       4      HOH A   1
+HETATM    5  O   HOH B   1       0.838   3.051   2.350  1.00  0.00           O  
+HETATM    6  H1  HOH B   1       0.160   2.348   2.415  1.00  0.00           H  
+HETATM    7  H2  HOH B   1       1.613   2.807   2.897  1.00  0.00           H  
+TER       8      HOH B   1
+HETATM    9  O   HOH C   1       1.420   1.865  -2.760  1.00  0.00           O  
+HETATM   10  H1  HOH C   1       1.851   1.367  -3.484  1.00  0.00           H  
+HETATM   11  H2  HOH C   1       1.668   1.470  -1.900  1.00  0.00           H  
+TER      12      HOH C   1
+HETATM   13  O   HOH D   1       2.757  -2.628   0.896  1.00  0.00           O  
+HETATM   14  H1  HOH D   1       2.463  -3.559   0.966  1.00  0.00           H  
+HETATM   15  H2  HOH D   1       2.049  -2.093   0.481  1.00  0.00           H  
+TER      16      HOH D   1
+ENDMDL
+MODEL        4
+HETATM    1  O   HOH A   1      -3.158   0.159   0.070  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      -2.525   0.891   0.220  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -2.711  -0.563  -0.416  1.00  0.00           H  
+TER       4      HOH A   1
+HETATM    5  O   HOH B   1       0.803   3.230   2.354  1.00  0.00           O  
+HETATM    6  H1  HOH B   1       0.858   2.935   3.286  1.00  0.00           H  
+HETATM    7  H2  HOH B   1       0.866   2.454   1.761  1.00  0.00           H  
+TER       8      HOH B   1
+HETATM    9  O   HOH C   1       1.251   1.733  -2.323  1.00  0.00           O  
+HETATM   10  H1  HOH C   1       1.413   2.652  -2.618  1.00  0.00           H  
+HETATM   11  H2  HOH C   1       2.076   1.213  -2.410  1.00  0.00           H  
+TER      12      HOH C   1
+HETATM   13  O   HOH D   1       2.568  -3.275   1.079  1.00  0.00           O  
+HETATM   14  H1  HOH D   1       2.258  -2.554   0.495  1.00  0.00           H  
+HETATM   15  H2  HOH D   1       3.367  -2.983   1.563  1.00  0.00           H  
+TER      16      HOH D   1
+ENDMDL
+MODEL        5
+HETATM    1  O   HOH A   1      -3.175   0.130  -0.190  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      -3.520   0.766   0.469  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      -2.623   0.605  -0.844  1.00  0.00           H  
+TER       4      HOH A   1
+HETATM    5  O   HOH B   1       1.121   3.143   2.391  1.00  0.00           O  
+HETATM    6  H1  HOH B   1       1.609   3.135   1.542  1.00  0.00           H  
+HETATM    7  H2  HOH B   1       0.733   4.031   2.536  1.00  0.00           H  
+TER       8      HOH B   1
+HETATM    9  O   HOH C   1       1.014   1.404  -2.220  1.00  0.00           O  
+HETATM   10  H1  HOH C   1       1.264   2.334  -2.040  1.00  0.00           H  
+HETATM   11  H2  HOH C   1       0.246   1.384  -2.826  1.00  0.00           H  
+TER      12      HOH C   1
+HETATM   13  O   HOH D   1       2.545  -3.606   1.318  1.00  0.00           O  
+HETATM   14  H1  HOH D   1       3.519  -3.520   1.371  1.00  0.00           H  
+HETATM   15  H2  HOH D   1       2.263  -4.412   1.797  1.00  0.00           H  
+TER      16      HOH D   1
+ENDMDL
+END
