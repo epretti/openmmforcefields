@@ -1,6 +1,6 @@
 <ForceField>
   <Info>
-    <DateGenerated>2025-04-30</DateGenerated>
+    <DateGenerated>2025-09-05</DateGenerated>
     <Source Source="files/ff19SB/leaprc.protein.ff19SB" md5hash="87a7957b891156ec5b5953fb45b385ef" sourcePackage="AmberTools" sourcePackageVersion="24.8">files/ff19SB/leaprc.protein.ff19SB</Source>
     <Reference>Tian, C.; Kasavajhala, K.; Belfon, K.A.A.; Raguette, L.; Huang, H.; Migues, A.N.; Bickel, J.; Wang, Y.; Pincay, J.; Wu, Q.; Simmerling, C. ff19SB: Amino-Acid-Specific Protein Backbone Parameters Trained against Quantum Mechanics Energy Surfaces in Solution. J. Chem. Theory Comput., 2020, 16, 528-552.</Reference>
   </Info>
@@ -34,6 +34,7 @@
     <Type class="protein-O" element="O" mass="16.0" name="protein-O" />
     <Type class="protein-O2" element="O" mass="16.0" name="protein-O2" />
     <Type class="protein-OH" element="O" mass="16.0" name="protein-OH" />
+    <Type class="protein-OP" element="O" mass="16.0" name="protein-OP" />
     <Type class="protein-P" element="P" mass="30.97" name="protein-P" />
     <Type class="protein-S" element="S" mass="32.06" name="protein-S" />
     <Type class="protein-SH" element="S" mass="32.06" name="protein-SH" />
@@ -2968,6 +2969,7 @@
     <Bond class1="protein-CV" class2="protein-NB" k="343087.99999999994" length="0.1394" />
     <Bond class1="protein-CW" class2="protein-H4" k="307105.5999999999" length="0.10800000000000001" />
     <Bond class1="protein-CW" class2="protein-NA" k="357313.5999999999" length="0.1381" />
+    <Bond class1="protein-OP" class2="protein-P" k="439319.99999999994" length="0.148" />
     <Bond class1="protein-O2" class2="protein-P" k="439319.99999999994" length="0.148" />
     <Bond class1="protein-OH" class2="protein-P" k="192463.99999999997" length="0.16100000000000003" />
     <Bond class1="protein-NA" class2="protein-P" k="209199.99999999997" length="0.18400000000000002" />
@@ -3016,6 +3018,7 @@
     <Angle angle="2.0943951023931953" class1="protein-CA" class2="protein-C" class3="protein-OH" k="585.76" />
     <Angle angle="2.1834068942449063" class1="protein-CC" class2="protein-NA" class3="protein-P" k="641.8256" />
     <Angle angle="2.1834068942449063" class1="protein-CR" class2="protein-NA" class3="protein-P" k="641.8256" />
+    <Angle angle="1.7868680881917944" class1="protein-NA" class2="protein-P" class3="protein-OP" k="358.98720000000003" />
     <Angle angle="1.9425514574696887" class1="protein-CB" class2="protein-C" class3="protein-NA" k="585.76" />
     <Angle angle="2.2479840765686965" class1="protein-CB" class2="protein-C" class3="protein-O" k="669.44" />
     <Angle angle="2.101376419401173" class1="protein-CT" class2="protein-C" class3="protein-O" k="669.44" />
@@ -3209,6 +3212,7 @@
     <Angle angle="1.8936822384138476" class1="protein-HO" class2="protein-OH" class3="protein-P" k="376.56" />
     <Angle angle="1.888969849433463" class1="protein-O2" class2="protein-P" class3="protein-OH" k="376.56" />
     <Angle angle="2.092649773141201" class1="protein-O2" class2="protein-P" class3="protein-O2" k="1171.52" />
+    <Angle angle="2.092649773141201" class1="protein-OP" class2="protein-P" class3="protein-OP" k="1171.52" />
     <Angle angle="1.726130630222392" class1="protein-CT" class2="protein-S" class3="protein-CT" k="518.816" />
     <Angle angle="1.8099064343181197" class1="protein-CT" class2="protein-S" class3="protein-S" k="569.024" />
     <Angle angle="1.6755160819145565" class1="protein-CT" class2="protein-SH" class3="protein-HS" k="359.824" />
@@ -3388,6 +3392,8 @@
     <Proper class1="" class2="protein-CV" class3="protein-NB" class4="" k1="10.0416" periodicity1="2" phase1="3.141592653589793" />
     <Proper class1="" class2="protein-CW" class3="protein-NA" class4="" k1="6.276" periodicity1="2" phase1="3.141592653589793" />
     <Proper class1="" class2="protein-OH" class3="protein-P" class4="" k1="1.046" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CC" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="1.00416" periodicity1="3" phase1="0.0" />
+    <Proper class1="protein-CR" class2="protein-NA" class3="protein-P" class4="protein-OP" k1="0.0" periodicity1="3" phase1="0.0" />
     <Proper class1="protein-C" class2="protein-N" class3="protein-CX" class4="protein-C" k1="0.0" k2="1.75728" k3="1.12968" k4="0.0" periodicity1="4" periodicity2="3" periodicity3="2" periodicity4="1" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
     <Proper class1="protein-C" class2="protein-N" class3="protein-XC" class4="protein-C" k1="0.0" k2="0.0" k3="0.0" k4="0.0" periodicity1="4" periodicity2="3" periodicity3="2" periodicity4="1" phase1="0.0" phase2="0.0" phase3="0.0" phase4="0.0" />
     <Proper class1="protein-N" class2="protein-CX" class3="protein-C" class4="protein-N" k1="0.0" k2="2.3012" k3="6.610720000000001" k4="1.8828" periodicity1="4" periodicity2="3" periodicity3="2" periodicity4="1" phase1="0.0" phase2="3.141592653589793" phase3="3.141592653589793" phase4="3.141592653589793" />
@@ -3643,7 +3649,7 @@
     <Improper class1="protein-NA" class2="" class3="" class4="protein-H" k1="4.184" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-CA" class2="" class3="protein-N2" class4="protein-N2" k1="43.932" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-N" class2="" class3="protein-CT" class4="protein-CT" k1="4.184" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-N" class2="" class3="protein-CX" class4="protein-CT" k1="4.184" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-N" class2="" class3="protein-CT" class4="protein-CX" k1="4.184" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-N" class2="" class3="protein-CT" class4="protein-XC" k1="4.184" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-CA" class2="" class3="" class4="protein-HA" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-CW" class2="" class3="" class4="protein-H4" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
@@ -3662,19 +3668,19 @@
     <Improper class1="protein-C" class2="protein-H5" class3="protein-O" class4="protein-OH" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-H" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-N" class2="protein-C" class3="protein-CX" class4="protein-H" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-N" class2="protein-C" class3="protein-H" class4="protein-XC" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-N" class2="protein-C" class3="protein-XC" class4="protein-H" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-N" class2="protein-C" class3="protein-CT" class4="protein-O" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-NA" class2="protein-CC" class3="protein-CR" class4="protein-P" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CB" class2="protein-C*" class3="protein-CA" class4="protein-CN" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CN" class2="protein-CA" class3="protein-CB" class4="protein-NA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CB" class2="protein-C" class3="protein-CB" class4="protein-NB" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CB" class2="protein-CA" class3="protein-CB" class4="protein-NB" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CJ" class2="protein-H1" class3="protein-H1" class4="protein-OH" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CJ" class2="protein-CT" class3="protein-H1" class4="protein-OH" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CJ" class2="protein-CT" class3="protein-H1" class4="protein-H1" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-NA" class2="protein-CR" class3="protein-CC" class4="protein-P" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CB" class2="protein-C*" class3="protein-CN" class4="protein-CA" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CN" class2="protein-NA" class3="protein-CA" class4="protein-CB" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CB" class2="protein-NB" class3="protein-C" class4="protein-CB" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CB" class2="protein-NB" class3="protein-CA" class4="protein-CB" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CJ" class2="protein-OH" class3="protein-H1" class4="protein-H1" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CJ" class2="protein-OH" class3="protein-H1" class4="protein-CT" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CJ" class2="protein-H1" class3="protein-H1" class4="protein-CT" k1="0.0" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-CO" class2="" class3="protein-O2" class4="protein-O2" k1="43.932" periodicity1="2" phase1="3.141592653589793" />
     <Improper class1="protein-C" class2="protein-2C" class3="protein-O" class4="protein-OH" k1="43.932" periodicity1="2" phase1="3.141592653589793" />
-    <Improper class1="protein-CA" class2="protein-2C" class3="protein-CA" class4="protein-CA" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
+    <Improper class1="protein-CA" class2="protein-CA" class3="protein-CA" class4="protein-2C" k1="4.6024" periodicity1="2" phase1="3.141592653589793" />
   </PeriodicTorsionForce>
   <NonbondedForce coulomb14scale="0.8333333333333334" lj14scale="0.5">
     <UseAttributeFromResidue name="charge" />
@@ -3707,6 +3713,7 @@
     <Atom class="protein-O" epsilon="0.87864" sigma="0.2959921901149463" />
     <Atom class="protein-O2" epsilon="0.87864" sigma="0.2959921901149463" />
     <Atom class="protein-OH" epsilon="0.8803136" sigma="0.3066473387839048" />
+    <Atom class="protein-OP" epsilon="0.7112800000000001" sigma="0.3296325257119256" />
     <Atom class="protein-P" epsilon="0.8368000000000001" sigma="0.37417746161894255" />
     <Atom class="protein-S" epsilon="1.1815616" sigma="0.35324134174264454" />
     <Atom class="protein-SH" epsilon="1.1815616" sigma="0.35324134174264454" />

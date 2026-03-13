@@ -1,0 +1,10 @@
+source leaprc.protein.ff19SB
+source leaprc.phosaa19SB
+chain_1 = sequence { NALA ALA H1D H1E H2E ALA CALA }
+chain_2 = sequence { NALA ALA H1D H1E H2E ALA CALA }
+test_case = sequence { chain_1 chain_2 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

@@ -1,0 +1,15 @@
+source oldff/leaprc.ff10
+chain_1 = sequence { AN }
+chain_2 = sequence { CN }
+chain_3 = sequence { GN }
+chain_4 = sequence { UN }
+chain_5 = sequence { OHE A3 }
+chain_6 = sequence { OHE C3 }
+chain_7 = sequence { OHE G3 }
+chain_8 = sequence { OHE U3 }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
