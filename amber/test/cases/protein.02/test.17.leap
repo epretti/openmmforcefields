@@ -1,0 +1,10 @@
+source leaprc.protein.ff03.r1
+chain_1 = sequence { NASP ASP ASP ASP CASP }
+chain_2 = sequence { NGLN GLN GLN GLN CGLN }
+chain_3 = sequence { NGLU GLU GLU GLU CGLU }
+test_case = sequence { chain_1 chain_2 chain_3 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

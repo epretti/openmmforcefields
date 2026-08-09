@@ -1,0 +1,18 @@
+source leaprc.water.opc3
+chain_1 = sequence { Sn }
+chain_2 = sequence { SR }
+chain_3 = sequence { TB }
+chain_4 = sequence { Th }
+chain_5 = sequence { Tm }
+chain_6 = sequence { U4+ }
+chain_7 = sequence { V2+ }
+chain_8 = sequence { Y }
+chain_9 = sequence { YB2 }
+chain_10 = sequence { ZN }
+chain_11 = sequence { Zr }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 chain_9 chain_10 chain_11 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

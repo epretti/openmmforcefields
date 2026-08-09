@@ -1,0 +1,18 @@
+{
+    "force_field_list": [
+        [
+            [
+                "leaprc.water.tip3p"
+            ],
+            [
+                "tip3p_standard.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": [
+        "TOTAL",
+        "BONDS_UB",
+        "ANGLES"
+    ]
+}

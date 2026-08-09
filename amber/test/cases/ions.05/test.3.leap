@@ -1,0 +1,20 @@
+source leaprc.water.spce
+chain_1 = sequence { Ag }
+chain_2 = sequence { CE }
+chain_3 = sequence { Ce }
+chain_4 = sequence { Cr }
+chain_5 = sequence { CR }
+chain_6 = sequence { CU }
+chain_7 = sequence { EU }
+chain_8 = sequence { EU3 }
+chain_9 = sequence { FE2 }
+chain_10 = sequence { FE }
+chain_11 = sequence { Sm }
+chain_12 = sequence { SM }
+chain_13 = sequence { Tl }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 chain_9 chain_10 chain_11 chain_12 chain_13 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

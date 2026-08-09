@@ -1,0 +1,26 @@
+1035,1040c1035,1052
+< X -CC-NA-CR   1     6.54421  180.0  2.0  HID/HIP chi3, Fit by mdgx
+< X -CC-NB-CR   1     8.53542  180.0  2.0  HIE chi3, Fit by mdgx
+< X -CC-CV-H4   1     5.87192  180.0  2.0  HID side chain, Fit by mdgx
+< X -CC-CW-H4   1     5.17993  180.0  2.0  HIE/HIP side chain, Fit by mdgx
+< X -CC-CV-NB   1     9.07767  180.0  2.0  HID chi3(2), Fit by mdgx
+< X -CC-CW-NA   1     5.23741  180.0  2.0  HIE/HIP chi3(2), Fit by mdgx
+---
+> C8-CC-NA-CR   1     6.54421  180.0  2.0  HID/HIP chi3, Fit by mdgx
+> CW-CC-NA-CR   1     6.54421  180.0  2.0  HID/HIP chi3, Fit by mdgx
+> TA-CC-NA-CR   1     6.54421  180.0  2.0  HID/HIP chi3, Fit by mdgx
+> CV-CC-NA-CR   1     6.54421  180.0  2.0  HID/HIP chi3, Fit by mdgx
+> TA-CC-NB-CR   1     8.53542  180.0  2.0  HIE chi3, Fit by mdgx
+> CW-CC-NB-CR   1     8.53542  180.0  2.0  HIE chi3, Fit by mdgx
+> NA-CC-CV-H4   1     5.87192  180.0  2.0  HID side chain, Fit by mdgx
+> TA-CC-CV-H4   1     5.87192  180.0  2.0  HID side chain, Fit by mdgx
+> NB-CC-CW-H4   1     5.17993  180.0  2.0  HIE/HIP side chain, Fit by mdgx
+> TA-CC-CW-H4   1     5.17993  180.0  2.0  HIE/HIP side chain, Fit by mdgx
+> NA-CC-CW-H4   1     5.17993  180.0  2.0  HIE/HIP side chain, Fit by mdgx
+> C8-CC-CW-H4   1     5.17993  180.0  2.0  HIE/HIP side chain, Fit by mdgx
+> NA-CC-CV-NB   1     9.07767  180.0  2.0  HID chi3(2), Fit by mdgx
+> TA-CC-CV-NB   1     9.07767  180.0  2.0  HID chi3(2), Fit by mdgx
+> NB-CC-CW-NA   1     5.23741  180.0  2.0  HIE/HIP chi3(2), Fit by mdgx
+> TA-CC-CW-NA   1     5.23741  180.0  2.0  HIE/HIP chi3(2), Fit by mdgx
+> NA-CC-CW-NA   1     5.23741  180.0  2.0  HIE/HIP chi3(2), Fit by mdgx
+> C8-CC-CW-NA   1     5.23741  180.0  2.0  HIE/HIP chi3(2), Fit by mdgx

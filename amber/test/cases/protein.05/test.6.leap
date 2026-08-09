@@ -1,0 +1,10 @@
+source oldff/leaprc.ff14SB.redq
+chain_1 = sequence { NLYS LYS LYS LYS CLYS }
+chain_2 = sequence { NMET MET MET MET CMET }
+chain_3 = sequence { NPHE PHE PHE PHE CPHE }
+test_case = sequence { chain_1 chain_2 chain_3 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

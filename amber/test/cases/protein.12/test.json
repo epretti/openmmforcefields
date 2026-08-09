@@ -1,0 +1,30 @@
+{
+    "force_field_list": [
+        [
+            [
+                "leaprc.protein.ff15ipq"
+            ],
+            [
+                "protein.ff15ipq.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.ff15ipq-vac"
+            ],
+            [
+                "protein.ff15ipq-vac.xml"
+            ]
+        ],
+        [
+            [
+                "leaprc.protein.ff19ipq"
+            ],
+            [
+                "protein.ff19ipq.xml"
+            ]
+        ]
+    ],
+    "template_list": null,
+    "skip_list": null
+}

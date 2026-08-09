@@ -1,0 +1,10 @@
+source oldff/leaprc.ff96
+chain_1 = sequence { NALA ALA ALA ALA CALA }
+chain_2 = sequence { NARG ARG ARG ARG CARG }
+chain_3 = sequence { NASN ASN ASN ASN CASN }
+test_case = sequence { chain_1 chain_2 chain_3 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

@@ -1,0 +1,9 @@
+source oldff/leaprc.ff94
+chain_1 = sequence { NALA ALA ASH GLH LYN ALA CALA }
+chain_2 = sequence { NALA ALA ASH GLH LYN ALA CALA }
+test_case = sequence { chain_1 chain_2 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit

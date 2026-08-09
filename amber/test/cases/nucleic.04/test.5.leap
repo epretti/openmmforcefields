@@ -1,0 +1,16 @@
+source oldff/leaprc.ff98
+chain_1 = sequence { RA5 RA RA RC RG RU RA RA3 }
+chain_2 = sequence { RA5 RA RA3 }
+chain_3 = sequence { RC5 RC RC3 }
+chain_4 = sequence { RG5 RG RG3 }
+chain_5 = sequence { RU5 RU RU3 }
+chain_6 = sequence { RAN }
+chain_7 = sequence { RCN }
+chain_8 = sequence { RGN }
+chain_9 = sequence { RUN }
+test_case = sequence { chain_1 chain_2 chain_3 chain_4 chain_5 chain_6 chain_7 chain_8 chain_9 }
+saveOff test_case test.off
+loadOff test.off
+saveAmberParm test_case test.top test.crd
+savePdb test_case test.pdb
+quit
