@@ -19,10 +19,10 @@ or to specifically access the older (now outdated) [`ff99SBildn`](https://doi.or
 ```python
 forcefield = ForceField("amber/ff99SBildn.xml")
 ```
-Various water models and associated parameters for ions are also included.  For instance, to load the ff14SB force field for proteins, and the TIP3P water model with the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended multivalent ion parameters (`parm/frcmod.ions234lm_126_tip3p`):
+Various water models and associated parameters for ions are also included.  For instance, to load the ff19SB force field for proteins, and the TIP3P water model with the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended multivalent ion parameters (`parm/frcmod.ions234lm_126_tip3p`):
 ```python
 forcefield = ForceField(
-    "amber/protein.ff14SB.xml",
+    "amber/protein.ff19SB.xml",
     "amber/tip3p_standard.xml",
 )
 ```
@@ -337,6 +337,6 @@ system_generator = SystemGenerator(
 )
 ```
 
-To use, for example, [OpenFF's Sage `openff-2.3.0`](https://github.com/openforcefield/openff-forcefields) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.2.1'`.
+To use, for example, [OpenFF's Sage `openff-2.3.0`](https://github.com/openforcefield/openff-forcefields) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.3.0'`.
 
 To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
