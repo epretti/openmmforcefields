@@ -1,32 +1,29 @@
 # User Guide
 
-## Using the AMBER and CHARMM biopolymer force fields
+## Using the Amber and CHARMM biopolymer force fields
 
-This repository contains force fields for use with the [OpenMM `ForceField` class](http://docs.openmm.org/latest/userguide/application.html#force-fields) for parameterizing biomolecular systems.
-If you're not familiar with this approach to applying parameters to biomolecular systems, please see the [OpenMM User Guide](http://docs.openmm.org/latest/userguide/application.html#force-fields).
+This repository contains force fields for use with the OpenMM [`ForceField`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html) class for parameterizing biomolecular systems.
+If you're not familiar with this approach to applying parameters to biomolecular systems, please see the [OpenMM User Guide](https://docs.openmm.org/latest/userguide/application/02_running_sims.html).
+Note that a selection of standard force fields from the Amber and CHARMM force field families is already bundled with the main OpenMM release, as also described [in the User Guide](https://docs.openmm.org/latest/userguide/application/02_running_sims.html#force-fields).
+Those force fields should be identical to the versions distributed with OpenMMForceFields but can be used directly without installing this package.  However, OpenMMForceFields provides a larger set of force fields from these families.
 
-### Using the AMBER force fields
+### Using the Amber force fields
 
-Once installed, the AMBER force fields will be registered in the `amber/` relative path searched by [`openmm.app.ForceField`](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField).
+Once installed, the Amber force fields will be registered in the `amber/` relative path searched by [`openmm.app.ForceField`](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html).
 
-For example, to specify the newer recommended [`ff14SB`](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.5b00255) force field and accompanying recommended ions and solvent models (corresponding to force fields loaded in LEaP with `leaprc.protein.ff14SB`), prepend the `amber` prefix and the `.xml` suffix:
+For example, to specify the [`ff19SB`](https://doi.org/10.1021/acs.jctc.9b00591) protein force field (corresponding to the force field loaded by LEaP with `leaprc.protein.ff19SB`):
 ```python
-forcefield = ForceField("amber/protein.ff14SB.xml")
+forcefield = ForceField("amber/protein.ff19SB.xml")
 ```
-To access just the [`ff14SB`](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.5b00255) force field converted from `oldff/leaprc.ff14SB`:
-```python
-forcefield = ForceField("amber/ff14SB.xml")
-```
-or to specifically access the older (now outdated) `ff99SBildn` force field converted from `oldff/leaprc.ff14SB`:
+or to specifically access the older (now outdated) [`ff99SBildn`](https://doi.org/10.1002/prot.22711) force field converted from `oldff/leaprc.ff99SBildn`:
 ```python
 forcefield = ForceField("amber/ff99SBildn.xml")
 ```
-The TIP3P conversion also includes the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended divalent counterion parameters (`parm/frcmod.ions234lm_126_tip3p`):
+Various water models and associated parameters for ions are also included.  For instance, to load the ff19SB force field for proteins, and the TIP3P water model with the [Joung and Cheatham recommended salt models](https://doi.org/10.1021/jp8001614) (`parm/frcmod.ionsjc_tip3p`) and recommended multivalent ion parameters (`parm/frcmod.ions234lm_126_tip3p`):
 ```python
 forcefield = ForceField(
-    "amber/protein.ff14SB.xml",
+    "amber/protein.ff19SB.xml",
     "amber/tip3p_standard.xml",
-    "amber/tip3p_HFE_multivalent.xml",
 )
 ```
 
@@ -37,35 +34,30 @@ Similarly, the CHARMM force fields will be registered in the `charmm/` relative 
 forcefield = ForceField("charmm/charmm36.xml")
 ```
 
-## Using AMBER GAFF 1.x and 2.x for small molecules
+## Using Amber GAFF 1.x and 2.x for small molecules
 
-The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using [GAFF](http://ambermd.org/antechamber/gaff.html) versions 1 or 2.
+The OpenMMForceFields package includes a [residue template generator](https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators) for the OpenMM [`ForceField`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html) class that automatically generates OpenMM residue templates for small molecules lacking parameters using [GAFF](https://ambermd.org/antechamber/gaff.html) versions 1 or 2.
 
 ### Cheminformatics toolkits
 
-The [`openff-toolkit`](http://openforcefield.org) is used to provide an interface with cheminformatics toolkits to interact with [`antechamber`](http://ambermd.org/antechamber/) from the [AmberTools](http://ambermd.org/AmberTools.php) package to generate parameters for small molecules.
-By default, the [`openff-toolkit`](http://github.com/openforcefield/openff-toolkit) will make use of the free and open source [RDKit cheminformatics toolkit](https://www.rdkit.org/) that is installed automatically, but will optionally use the [OpenEye toolkit](https://docs.eyesopen.com/toolkits/python/index.html) if it is installed and licensed.
+The [OpenFF Toolkit](https://github.com/openforcefield/openff-toolkit) is used to provide an interface with cheminformatics toolkits to interact with [Antechamber](https://ambermd.org/antechamber/ac.html) from the [AmberTools](https://ambermd.org/AmberTools.php) package to generate parameters for small molecules.
+By default, the OpenFF Toolkit will make use of the free and open source [RDKit cheminformatics toolkit](https://www.rdkit.org/) that is installed automatically, but will optionally use the [OpenEye toolkit](https://docs.eyesopen.com/toolkits/python/index.html) if it is installed and licensed.
 The OpenEye toolkit is available [for free for academics for non-IP-generating academic research](https://www.eyesopen.com/academic-licensing).
 
 ### On-the-fly template generation for small molecules
 
-Generation of OpenMM-compatible parameters for small molecules encountered in an OpenMM `Topology` is handled through `openmmforcefields.generators.GAFFTemplateGenerator`.
-Because the [OpenMM `Topology` object](http://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html#openmm.app.topology.Topology) used by [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) does not know the precise chemical identity of molecules represented in the topology---which contain only elements and bonds between them, without stereochemical or bond order information---it is necessary to instruct `GAFFTemplateGenerator` which small molecules it will encounter in processing the `Topology` object ahead of time; it then matches these by element and bond pattern.
+Generation of OpenMM-compatible parameters for small molecules encountered in an OpenMM [`Topology`](https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html) is handled through `openmmforcefields.generators.GAFFTemplateGenerator`.
+Because the OpenMM [`Topology`](https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html) object used by the OpenMM [`ForceField`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html) class does not know the precise chemical identity of molecules represented in the topology—which contains only elements and bonds between them, without stereochemical or bond order information—it is necessary to instruct `GAFFTemplateGenerator` which small molecules it will encounter in processing the `Topology` object ahead of time; it then matches these by element and bond pattern.
 
 ### Specifying molecules
 
-To do this, it is necessary to specify one or more [`openff.toolkit.topology.Molecule`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Molecule.html#openff.toolkit.topology.Molecule) objects which can easily be created from many different representations of small molecules, including SMILES strings and common molecule storage formats.
-There are many ways to create an [OpenFF `Molecule` object](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Molecule.html#openff.toolkit.topology.Molecule) from various file formats as well---see the [API docs](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Molecule.html#openff.toolkit.topology.Molecule) for more details.
+To do this, it is necessary to specify one or more [`openff.toolkit.Molecule`](https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html) objects which can easily be created from many different representations of small molecules, including SMILES strings and common molecule storage formats.
+There are many ways to create an OpenFF [`Molecule`](https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html) object: see the [OpenFF Toolkit documentation](https://docs.openforcefield.org/projects/toolkit/en/stable/users/molecule_cookbook.html) for more details.
 
 ### Partial charges for small molecules
 
-If the provided molecule(s) contain nonzero (user-specified) partial charges (stored in the `Molecule.partial_charges` attribute), those partial charges will be used.
-If they do _not_ contain partial charges, the OpenFF Toolkit is used to generate them.
-
-* In `GAFFTemplateGenerator`, [Antechamber](http://ambermd.org/antechamber/) from the [AmberTools](http://ambermd.org/AmberTools.php) distribution (which uses the `sqm` semiempirical quantum chemical package) is used to assign AM1-BCC charges (`antechamber -c bcc`). The conformers used in charge assignment are generated by RDKit.
-* In `SMIRNOFFTemplateGenerator`, the charges are assigned by the OpenFF software using [OpenFF NAGL](https://github.com/openforcefield/openff-nagl) or according to the [AM1-BCC settings of the SMIRNOFF specification](https://openforcefield.github.io/standards/standards/smirnoff/#toolkitam1bcc-temporary-support-for-toolkit-based-am1-bcc-partial-charges) (depending on the force field in use).
-  * If OpenEye Toolkits are installed and licensed, OpenEye's Quacpac Toolkit is used to generate [AM1-BCC-ELF10 charges](https://docs.eyesopen.com/toolkits/python/quacpactk/OEProtonClasses/OEAM1BCCELF10Charges.html). In this case, the conformers used to generate charges are generated by OpenEye's Omega Toolkit.
-  * If OpenEye Toolkits are not installed or not licensed, AmberTools's Antechamber/`sqm` is used to generate AM1-BCC charges in the same way that it is used in `GAFFTemplateGenerator`. In this case, the conformers used to generate charges are generated by RDKit.
+If the provided molecule(s) contain nonzero (user-specified) partial charges (stored in the [`Molecule.partial_charges`](https://docs.openforcefield.org/projects/toolkit/en/stable/api/generated/openff.toolkit.topology.Molecule.html#openff.toolkit.topology.Molecule.partial_charges) attribute), those partial charges will be used.
+If they do _not_ contain partial charges, [Antechamber](https://ambermd.org/antechamber/ac.html) (which uses the `sqm` semiempirical quantum chemical package) is used to assign AM1-BCC charges (`antechamber -c bcc`). The conformers used in charge assignment are generated by RDKit.
 
 *Note:* The `Molecule` object must have the all protons and stereochemistry explicitly specified, and must match the exact protonation and tautomeric state of the molecule that will be found in your OpenMM `Topology` object.
 The atom ordering need not be the same.
@@ -91,14 +83,10 @@ from openmmforcefields.generators import (
 )
 
 gaff = GAFFTemplateGenerator(molecules=molecule, forcefield="gaff-2.2.20")
-# Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
+# Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB
 from openmm.app import ForceField
 
-forcefield = ForceField(
-    "amber/protein.ff14SB.xml",
-    "amber/tip3p_standard.xml",
-    "amber/tip3p_HFE_multivalent.xml",
-)
+forcefield = ForceField("amber19-all.xml", "amber19/tip3pfb.xml")
 # Register the GAFF template generator
 forcefield.registerTemplateGenerator(gaff.generator)
 # You can now parameterize an OpenMM Topology object that contains the specified molecule.
@@ -134,10 +122,12 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Using the Open Force Field Initiative SMIRNOFF small molecule force fields
 
-The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](http://openforcefield.org) [SMIRNOFF](https://openforcefield.github.io/standards/standards/smirnoff/) small molecule force fields.
-This includes the [`openff-1.x.y` ("Parsley")](https://openforcefield.org/news/introducing-openforcefield-1.0/) and [`openff-2.x.y` ("Sage")](https://pubs.acs.org/doi/10.1021/acs.jctc.3c00039) small molecule force field lines, including the [most recent force field in each lines](https://github.com/openforcefield/openff-forcefields).
+The OpenMMForceFields package includes a [residue template generator](https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators) for the OpenMM [`ForceField`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html) class that automatically generates OpenMM residue templates for small molecules lacking parameters using the [Open Force Field Initiative](https://openforcefield.org/) [SMIRNOFF](https://openforcefield.github.io/standards/standards/smirnoff/) small molecule force fields.
+This includes the [`openff-1.x.y` ("Parsley")](https://doi.org/10.1021/acs.jctc.1c00571) and [`openff-2.x.y` ("Sage")](https://doi.org/10.1021/acs.jctc.3c00039) small molecule force field lines, including the [most recent force field in each line](https://github.com/openforcefield/openff-forcefields).
 
 The `SMIRNOFFTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
+
+Like `GAFFTemplateGenerator`, when user-specified partial charges are not present, partial charges will be assigned automatically.  For SMIRNOFF force fields, the charges are assigned by the OpenFF software using [OpenFF NAGL](https://github.com/openforcefield/openff-nagl) or according to the [AM1-BCC settings of the SMIRNOFF specification](https://openforcefield.github.io/standards/standards/smirnoff/#toolkitam1bcc-temporary-support-for-toolkit-based-am1-bcc-partial-charges) (depending on the force field in use).
 
 ### Examples using `SMIRNOFFTemplateGenerator` to generate small molecule SMIRNOFF parameters
 
@@ -152,14 +142,10 @@ molecule = Molecule.from_smiles("c1ccccc1")
 from openmmforcefields.generators import SMIRNOFFTemplateGenerator
 
 smirnoff = SMIRNOFFTemplateGenerator(molecules=molecule, forcefield="openff-2.3.0")
-# Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
+# Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB
 from openmm.app import ForceField
 
-forcefield = ForceField(
-    "amber/protein.ff14SB.xml",
-    "amber/tip3p_standard.xml",
-    "amber/tip3p_HFE_multivalent.xml",
-)
+forcefield = ForceField("amber19-all.xml", "amber19/tip3pfb.xml")
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(smirnoff.generator)
 
@@ -247,9 +233,8 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 
 ## Using espaloma to generate small molecule force fields
 
-The OpenMMForceFields package includes a [residue template generator](http://docs.openmm.org/latest/userguide/application.html#adding-residue-template-generators) for [the OpenMM `ForceField` class](http://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html#openmm.app.forcefield.ForceField) that can automatically generate OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
+The OpenMMForceFields package includes a [residue template generator](https://docs.openmm.org/latest/userguide/application/06_creating_ffs.html#adding-residue-template-generators) for the OpenMM [`ForceField`](https://docs.openmm.org/latest/api-python/generated/openmm.app.forcefield.ForceField.html) class that automatically generates OpenMM residue templates for small molecules lacking parameters using [espaloma](https://github.com/choderalab/espaloma) via one of its released force fields, provided `espaloma` and its dependencies are installed.
 `espaloma` uses a [graph convolutional model](https://arxiv.org/abs/2010.01196) to generate both valence parameters and fast partial charges.
-
 
 The `EspalomaTemplateGenerator` residue template generator operates in a manner very similar to `GAFFTemplateGenerator`, so we only highlight its differences here.
 
@@ -269,14 +254,10 @@ from openmmforcefields.generators import (
 )
 
 espaloma = EspalomaTemplateGenerator(molecules=molecule, forcefield="espaloma-0.3.2")
-# Create an OpenMM ForceField object with AMBER ff14SB and TIP3P with compatible ions
+# Create an OpenMM ForceField object with Amber ff19SB and TIP3P-FB
 from openmm.app import ForceField
 
-forcefield = ForceField(
-    "amber/protein.ff14SB.xml",
-    "amber/tip3p_standard.xml",
-    "amber/tip3p_HFE_multivalent.xml",
-)
+forcefield = ForceField("amber19-all.xml", "amber19/tip3pfb.xml")
 # Register the SMIRNOFF template generator
 forcefield.registerTemplateGenerator(espaloma.generator)
 ```
@@ -314,10 +295,7 @@ Newly parameterized molecules will be written to the cache, saving time next tim
 ## Automating force field management with `SystemGenerator`
 
 The OpenMMForceFields package provides the `openmmforcefields.generators.SystemGenerator` class that handles management of common force fields transparently for you.
-
-### Using `SystemGenerator` to automate the use of AMBER force fields with GAFF, OpenFF, or espaloma for small molecule parameterization
-
-Here's an example that uses GAFF 2.2.20 along with the new `ff14SB` generation of AMBER force fields (and compatible solvent models) to generate an OpenMM `System` object from an [Open Force Field `Topology`](https://open-forcefield-toolkit.readthedocs.io/en/latest/api/generated/openff.toolkit.topology.Topology.html#openff.toolkit.topology.Topology) object:
+Here's an example that uses GAFF 2.2.20 along with the Amber `ff19SB` force field and TIP3P-FB water model to generate an OpenMM [`System`](https://docs.openmm.org/latest/api-python/generated/openmm.openmm.System.html) from an OpenMM [`Topology`](https://docs.openmm.org/latest/api-python/generated/openmm.app.topology.Topology.html):
 ```python
 # Define the keyword arguments to feed to ForceField
 from openmm import unit
@@ -333,10 +311,7 @@ forcefield_kwargs = {
 from openmmforcefields.generators import SystemGenerator
 
 system_generator = SystemGenerator(
-    forcefields=[
-        "amber/ff14SB.xml",
-        "amber/tip3p_standard.xml",
-    ],
+    forcefields=["amber19-all.xml", "amber19/tip3pfb.xml"],
     small_molecule_forcefield="gaff-2.2.20",
     forcefield_kwargs=forcefield_kwargs,
     cache="db.json",
@@ -356,15 +331,12 @@ You can modify this behavior with the optional `periodic_forcefield_kwargs` and 
 from openmm import app
 
 system_generator = SystemGenerator(
-    forcefields=[
-        "amber/ff14SB.xml",
-        "amber/tip3p_standard.xml",
-    ],
+    forcefields=["amber19-all.xml", "amber19/tip3pfb.xml"],
     periodic_forcefield_kwargs={"nonbondedMethod": app.LJPME},
     nonperiodic_forcefield_kwargs={"nonbondedMethod": app.CutoffNonPeriodic},
 )
 ```
 
-To use the [OpenFF's Sage `openff-2.2.1`](https://github.com/openforcefield/openff-forcefields) or a newer version, an update of the [Open Force Field ("Parsley") small molecule force field](https://openforcefield.org/news/introducing-openforcefield-1.0/) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.2.1'`.
+To use, for example, [OpenFF's Sage `openff-2.3.0`](https://github.com/openforcefield/openff-forcefields) instead of GAFF 2.2.20, we would have instead specified `small_molecule_forcefield='openff-2.3.0'`.
 
 To use [espaloma](https://github.com/choderalab/espaloma) for assigning small molecule parameters, for example with the [`espaloma-0.3.2` model](https://github.com/choderalab/espaloma/releases/tag/0.3.2) released with the [espaloma preprint](https://arxiv.org/abs/2307.07085), you can specify `small_molecule_forcefield='espaloma-0.3.2'`.
